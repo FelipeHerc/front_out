@@ -1,39 +1,48 @@
 import React, { Component } from 'react';
-import { Navbar, Nav, Form, FormControl, Button } from 'react-bootstrap';
 import { withRouter } from 'react-router-dom';
-import { object } from 'prop-types';
+import styled from 'styled-components';
+import { getColor } from '../../utils/colors'
+
+const StyledHeader = styled.div`
+  align-items: center;
+  width: 100%;
+  height: 4rem;
+  background-color: ${props => getColor(2)};
+  position: sticky;
+  top: 0;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: row;
+  align-items: baseline;
+`;
+
+const StyledHome = styled.div`
+  margin: 7px 15px 7px 15px;
+  border-radius: 25px;
+  border-style: solid;
+  border-width: 2px;
+  border-color: ${props => getColor(5)};
+  color: ${props => getColor(5)};
+  padding: 8px 12px;
+`;
+
+const StyledItem = styled.div`
+  margin: 7px 15px 7px 15px;
+  border-color: ${props => getColor(5)};
+  color: ${props => getColor(5)};
+  padding: 8px 12px;
+`;
 
 class Header extends Component {
   render() {
-    const { history } = this.props;
     return (
-      <React.Fragment>
-        <Navbar bg="primary" variant="dark" onClick={() => history.replace('/')}>
-          <img
-          src="http://localhost:3000/icons/feather.svg"
-          width="30"
-          height="30"
-          className="d-inline-block align-top"
-          alt=""
-          />
-          <Navbar.Brand className="ml-2 mr-2">Navbar</Navbar.Brand>
-          <Nav className="mr-auto">
-            <Nav.Link href="#home">Home</Nav.Link>
-            <Nav.Link href="#features">Features</Nav.Link>
-            <Nav.Link href="#pricing">Pricing</Nav.Link>
-          </Nav>
-          <Form inline>
-            <FormControl type="text" placeholder="Search" className="mr-sm-2" />
-            <Button variant="outline-light">Search</Button>
-          </Form>
-        </Navbar>
-      </React.Fragment>
-    );
+      <StyledHeader>
+
+      </StyledHeader>
+
+    )
   }
-};
-
-Header.propTypes = {
-  history: object,
-};
-
+}
 export default withRouter(Header);
