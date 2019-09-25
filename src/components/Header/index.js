@@ -10,6 +10,10 @@ const StyledHeader = styled.div`
   background-color: ${props => getColor(2)};
   position: sticky;
   top: 0;
+  align-content: center;
+  align-items: baseline;
+  display: flex;
+  flex-direction: row;
 `;
 
 const Row = styled.div`
@@ -33,12 +37,23 @@ const StyledItem = styled.div`
   border-color: ${props => getColor(5)};
   color: ${props => getColor(5)};
   padding: 8px 12px;
+  :hover{
+    cursor: pointer;
+    border-radius: 20px;
+    background-color: ${props => getColor(3)};
+  }
 `;
 
 class Header extends Component {
   render() {
     return (
       <StyledHeader>
+      <Row>
+        <StyledHome>Sisteminha</StyledHome>
+        <StyledItem>Pessoas</StyledItem>
+        <StyledItem>Equipamentos</StyledItem>
+        <StyledItem>Empresas</StyledItem>
+      </Row>
 
       </StyledHeader>
 

@@ -9,8 +9,7 @@ const initialState = {
   loaded: false,
   loading: false,
   error: false,
-  person: {
-  },
+  person: [],
 }
 
 export const reducer = (
@@ -29,7 +28,7 @@ export const reducer = (
         ...state,
         loading: false,
         loaded: true,
-        person: result.data,
+        person: result.data.data,
       };
     case TYPES.GET_CURRICULUM_ERROR:
       return {
@@ -44,20 +43,7 @@ export const reducer = (
   }
 };
 
-// export const funct = () => {
-//   return {
-//     types: [
-//       TYPES.GET_PERSON,
-//       TYPES.GET_PERSON_SUCCESS,
-//       TYPES.GET_PERSON_ERROR,
-//     ],
-//     promise: client =>
-//       client.get('http://localhost:3000/owners'),
-//   };
-// };
-
-
-export const funct = () => {
+export const getAllPerson = () => {
 
   return (dispatch) => {
     dispatch({
