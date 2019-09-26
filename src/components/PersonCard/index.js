@@ -1,13 +1,12 @@
 import React from 'react';
 import { string } from 'prop-types';
-import styled from 'styled-components';
-
+import styled from 'styled-components'; 
+import { FaUserAlt } from "react-icons/fa";
 const StyledBox = styled.div`
   display: flex;
   flex-direction: row;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  height: 40px;
   width: 75vw;
   margin: 10px;
   padding: 10px;
@@ -16,15 +15,34 @@ const StyledBox = styled.div`
   margin-bottom: 5px;
 `;
 
+const Col = styled.div`
+  display: flex;
+  flex-direction: column;
+`;
+
+const Row = styled.div`
+  display: flex;
+  flex-direction: Row;
+`;
+
+const Text = styled.div`
+  margin: 0 10px 0 0;
+`;
 
 const PersonList = ({id, name, cpf, company_name, sector_name}) => {
   return (
     <StyledBox>
-      <p>{id}   </p>
-      <p>{name}   </p>
-      <p>{cpf}   </p>
-      <p>{company_name}   </p>
-      <p>{sector_name}   </p>
+      <FaUserAlt />
+      <Col>
+        <Row>
+          <Text><strong>Nome:</strong> {name}</Text> 
+          <Text>CPF: {cpf}</Text>
+        </Row>
+        <Row>
+          <Text>Empresa: {company_name}</Text>
+          <Text>Setor: {sector_name}</Text>
+        </Row>
+      </Col>
     </StyledBox>
   )
 
