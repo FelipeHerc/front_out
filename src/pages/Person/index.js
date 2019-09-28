@@ -66,7 +66,7 @@ Person.propTypes = {
   person: array,
 };
 
-const mapStateToProps = ({ person: { person, funct, loaded, loading } }) => ({
+const mapStateToProps = ({ person: { person, getAllPerson, loaded, loading } }) => ({
   person,
   getAllPerson,
   loaded,

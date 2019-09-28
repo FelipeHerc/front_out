@@ -21,7 +21,7 @@ const Button = ({ color, text }) => {
     "&:hover": {
       "background-color": "#bababa"
     }
-  };
+  };  
 
   return(
     <StyledButton style={buttonColor}>{text}</StyledButton>
