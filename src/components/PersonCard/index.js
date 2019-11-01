@@ -29,7 +29,7 @@ const Text = styled.div`
   margin: 0 10px 0 0;
 `;
 
-const PersonList = ({id, name, cpf, company_name, sector_name}) => {
+const PersonCard = ({id, name, cpf, company_name, sector_name}) => {
   return (
     <StyledBox>
       <FaUserAlt />
@@ -48,7 +48,7 @@ const PersonList = ({id, name, cpf, company_name, sector_name}) => {
 
 }
 
-PersonList.propTypes = {
+PersonCard.propTypes = {
   id: string.isRequired,
   name: string.isRequired,
   cpf: string.isRequired,
@@ -56,4 +56,4 @@ PersonList.propTypes = {
   sector_name: string.isRequired
 };
 
-export default PersonList;
+export default PersonCard;

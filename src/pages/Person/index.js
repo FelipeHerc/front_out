@@ -1,13 +1,14 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getAllPerson } from '../../store/modules/getPerson';
+import { getAllCompany } from '../../store/modules/getCompany';
+import { getAllSector } from '../../store/modules/getSector';
 import { array } from 'prop-types';
-import { PersonCard, Loader } from '../../components'
+import { PersonCard, Loader, CreateOrUpdatePerson } from '../../components'
 import styled from 'styled-components';
+import Modal from 'react-responsive-modal';
 
 const StyledListBox = styled.div`
-  display: flex;
-  flex-direction: column;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
   margin: 20px 10vw 20px 10vw;
@@ -18,25 +19,59 @@ const StyledListBox = styled.div`
   border-radius: 5px;
 `;
 
+const Row = styled.div`
+    display: flex;    
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
+const H2 = styled.h2`
+  margin: 10px 0px 10px 20px;
+`;
+
 class Person extends Component{
+  constructor() {
+    super();
+
+    this.state = {
+      open: false
+    }
+  }
+
   componentDidMount() {
     this.props.getAllPerson();
+    this.props.getAllCompany();
+    this.props.getAllSector();
   }
+  
+  onOpenModal = () => {
+    this.setState({ open: true });
+  };
+ 
+  onCloseModal = () => {
+    this.setState({ open: false });
+  };
   render()
   {
-    const { person, loaded, loading } = this.props;
-    console.log(loaded);
-    console.log(loading);
+    const { open } = this.state;
+    const { person, company, sector, loading, loadingCompany, loadingSector } = this.props;
 
     return (
       <Fragment>
         {
-          loading ? 
+          (loading || loadingCompany || loadingSector) ? 
             (
               <Loader />
             ) :
             (
               <StyledListBox>
+                <Row>
+                  <H2>Funcionários</H2>
+                  <button onClick={this.onOpenModal}>Open modal</button>
+                  <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllPerson()} center>
+                    <CreateOrUpdatePerson label="Criar funcionário" companyList={company} sectorList={sector}/>
+                  </Modal>
+                </Row>
                 {
                   person.map((item) => (
                     <PersonCard 
@@ -48,7 +83,6 @@ class Person extends Component{
                       sector_name={item.attributes.sector.name}
                     />
                   ))
-
                 }
               </StyledListBox>
             )
@@ -60,17 +94,34 @@ class Person extends Component{
 
 Person.defaultProps = {
   person: [],
+  sector: [],
+  company: []
 };
 
 Person.propTypes = {
   person: array,
+  sector: array,
+  company: array,
 };
 
-const mapStateToProps = ({ person: { person, getAllPerson, loaded, loading } }) => ({
+const mapStateToProps = (
+  { 
+    person: { person, getAllPerson, loaded, loading }, 
+    company: { company, getAllCompany, loadedCompany, loadingCompany },
+    sector: { sector, getAllSector, loadedSector, loadingSector },
+  }) => ({
   person,
   getAllPerson,
   loaded,
   loading,
+  company, 
+  getAllCompany, 
+  loadedCompany, 
+  loadingCompany,
+  sector, 
+  getAllSector, 
+  loadedSector, 
+  loadingSector
 });
 
-export default connect(mapStateToProps, { getAllPerson } )(Person);
+export default connect(mapStateToProps, { getAllPerson, getAllCompany, getAllSector } )(Person);
