@@ -7,6 +7,12 @@ import { array } from 'prop-types';
 import { PersonCard, Loader, CreateOrUpdatePerson } from '../../components'
 import styled from 'styled-components';
 import Modal from 'react-responsive-modal';
+import { makeStyles } from '@material-ui/core/styles';
+import Button from '@material-ui/core/Button';
+
+const ButtonBox = styled.div`
+  margin: auto 17px;
+`
 
 const StyledListBox = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -47,12 +53,21 @@ class Person extends Component{
   onOpenModal = () => {
     this.setState({ open: true });
   };
- 
+  
   onCloseModal = () => {
     this.setState({ open: false });
   };
   render()
   {
+    const classes = {
+      button: {
+        margin: 5,
+        height: 20
+      },
+      input: {
+        display: 'none',
+      }
+    }
     const { open } = this.state;
     const { person, company, sector, loading, loadingCompany, loadingSector } = this.props;
 
@@ -67,7 +82,11 @@ class Person extends Component{
               <StyledListBox>
                 <Row>
                   <H2>Funcionários</H2>
-                  <button onClick={this.onOpenModal}>Open modal</button>
+                  <ButtonBox>
+                    <Button variant="outlined" color="primary" size="small" className={classes.button} onClick={this.onOpenModal}>
+                      Criar novo funcionário
+                    </Button>
+                  </ButtonBox>
                   <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllPerson()} center>
                     <CreateOrUpdatePerson label="Criar funcionário" companyList={company} sectorList={sector}/>
                   </Modal>
@@ -81,6 +100,8 @@ class Person extends Component{
                       cpf={item.attributes.cpf} 
                       company_name={item.attributes.company.name}
                       sector_name={item.attributes.sector.name}
+                      companyList={company} 
+                      sectorList={sector}
                     />
                   ))
                 }
