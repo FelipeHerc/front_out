@@ -9,6 +9,8 @@ import styled from 'styled-components';
 import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
+import { withRouter } from 'react-router-dom';
+import axios from 'axios';
 
 const Col = styled.div`
   display: flex;
@@ -21,7 +23,7 @@ const Row = styled.div`
 
 const useStyles = makeStyles(theme => ({
   button: {
-    margin: theme.spacing(1),
+    marginTop: 25
   },
   formControl: {
     margin: theme.spacing(1),
@@ -35,6 +37,8 @@ const useStyles = makeStyles(theme => ({
   select: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
+    paddingTop: 16,
+    paddingBottom: 6,
     width: 200,
   },
   textFieldBig: {
@@ -58,7 +62,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, companyList, sectorList }) => {
+const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, companyList, sectorList, history }) => {
   const classes = useStyles();
   const [openEmpresa, setOpenEmpresa] = React.useState(false);
   const [openSector, setOpenSector] = React.useState(false);
@@ -66,8 +70,8 @@ const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, company
     personNome: nome,
     personCpf: cpf,
     personEmail: email,
-    personEmpresa: empresa,
     personSetor: setor,
+    personEmpresa: empresa,
   });
 
   console.log(values);
@@ -117,7 +121,7 @@ const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, company
               label="Cpf"
               className={classes.textField}
               value={values.personCpf}
-              onChange={handleChange('cpf')}
+              onChange={handleChange('personCpf')}
               margin="normal"
             />
             <TextField
@@ -174,9 +178,21 @@ const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, company
           size="large"
           className={classes.button}
           startIcon={<SaveIcon />}
-          onClick={() => { console.log('a'); }}
+          onClick={() => {
+            axios.post('http://localhost:3000/owners',
+            {  
+              'name': values.personNome,
+              'cpf': values.personCpf,
+              'email': values.personEmail,
+              'sector_id': values.personSetor,
+              'company_id': values.personEmpresa
+            })
+            .then(function(response){
+              
+            });   
+          }}
         >
-          Save
+          Salvar
         </Button>
         </FormControl>
     </div>
@@ -192,5 +208,4 @@ CreateOrUpdatePerson.propTypes = {
   companyList: array,
   SectorList: array,
 }
-
-export default CreateOrUpdatePerson;
+export default withRouter(CreateOrUpdatePerson);
