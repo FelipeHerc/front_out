@@ -5,8 +5,10 @@ import { FaUserAlt } from "react-icons/fa";
 import { FaKey } from "react-icons/fa";
 import { FaIndustry } from "react-icons/fa";
 import { FaPaste } from "react-icons/fa";
+import { FaMailBulk } from "react-icons/fa";
 import Button from '@material-ui/core/Button';
 import Modal from 'react-responsive-modal';
+import { CreateOrUpdatePerson } from '../../components'
 
 const ButtonBox = styled.div`
   margin-left: 10px;
@@ -33,8 +35,13 @@ const PersonIcon = styled(FaUserAlt)`
   height: 12px;
 `;
 
+const MailIcon = styled(FaMailBulk)`
+  margin-right: 10px;
+  width: 12px;
+  height: 12px;
+`;
+
 const KeyIcon = styled(FaKey)`
-  margin-left: 10px;  
   margin-right: 10px;
   width: 12px;
   height: 12px;
@@ -69,7 +76,7 @@ const Text = styled.div`
   margin: 0 10px 0 0;
 `;
 
-const PersonCard = ({id, name, cpf, company_name, sector_name, companyList, sectorList}) => {
+const PersonCard = ({id, name, cpf, email, company_name, sector_name, companyList, sectorList, company, sector}) => {
   const [open, setOpen] = useState(0);
   return (
     <StyledBox>
@@ -78,10 +85,12 @@ const PersonCard = ({id, name, cpf, company_name, sector_name, companyList, sect
           <Row>
             <PersonIcon/>
             <Text><strong>Nome:</strong> {name}</Text> 
-            <KeyIcon/>
-            <Text><strong>Cpf:</strong> {cpf}</Text>
+            <MailIcon/>
+            <Text><strong>Email:</strong> {email}</Text>
           </Row>
           <Row>
+            <KeyIcon/>
+            <Text><strong>Cpf:</strong> {cpf}</Text>
             <CompanyIcon/>
             <Text><strong>Empresa:</strong> {company_name}</Text>
             <SectorIcon/>
@@ -95,18 +104,28 @@ const PersonCard = ({id, name, cpf, company_name, sector_name, companyList, sect
           () => {
             setOpen(true)
           }
-                    
           } >
             Editar
           </Button>
         </ButtonBox>
         <ButtonBox>
           <Button variant="contained" color="secondary" size="small">
-            Excluir
+            Deletar
           </Button>
         </ButtonBox>
         <Modal open={open} onClose={() => setOpen(false)} center>
-          JOOJ
+          <CreateOrUpdatePerson
+            personId={id}
+            isEditing={true}
+            label="Editar funcionário" 
+            companyList={companyList} 
+            sectorList={sectorList}
+            nome={name}
+            cpf={cpf}
+            email={email}
+            empresa={company}
+            setor={sector}
+          />
         </Modal>
       </Row>
     </StyledBox>

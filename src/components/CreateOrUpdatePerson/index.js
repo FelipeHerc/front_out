@@ -1,4 +1,5 @@
 import React from 'react';
+import { Alert } from '../../components';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { string, array } from 'prop-types';
@@ -16,6 +17,7 @@ const Col = styled.div`
   display: flex;
   flex-direction: column;
 `
+
 const Row = styled.div`
   display: flex;
   flex-direction: row;
@@ -34,11 +36,16 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
     width: 200,
   },
-  select: {
+  company: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
     paddingTop: 16,
-    paddingBottom: 6,
+    width: 200,
+  },
+  sector: {
+    marginLeft: theme.spacing(1),
+    marginRight: theme.spacing(1),
+    paddingTop: 16,
     width: 200,
   },
   textFieldBig: {
@@ -47,12 +54,12 @@ const useStyles = makeStyles(theme => ({
     width: 400,
   },
   label: {
-    marginTop: 144,
-    marginLeft: 7,    
+    // marginTop: 160,
+    // marginLeft: 7,    
   },
   label2: {
-    marginTop: 144,
-    marginLeft: 224,    
+    // marginTop: 160,
+    // marginLeft: 224,    
   },
   dense: {
     marginTop: 19,
@@ -62,8 +69,11 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, companyList, sectorList, history }) => {
+const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, empresa, setor, companyList, sectorList, history }) => {
   const classes = useStyles();
+  const [saved, setSaved] = React.useState(false);
+  const [emptyField, setEmptyField] = React.useState(false);
+  const [saveError, setSaveError] = React.useState(false);
   const [openEmpresa, setOpenEmpresa] = React.useState(false);
   const [openSector, setOpenSector] = React.useState(false);
   const [values, setValues] = React.useState({
@@ -74,8 +84,6 @@ const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, company
     personEmpresa: empresa,
   });
 
-  console.log(values);
-  
   const handleChange = normalize => event => {
     setValues({ ...values, [normalize]: event.target.value });
   };
@@ -84,7 +92,7 @@ const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, company
     setOpenEmpresa(false);
   };
 
-  const handleOpenEmpresa = () => {
+  const handleOpenEmpresa  = () => {
     setOpenEmpresa(true);
   };
 
@@ -98,6 +106,7 @@ const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, company
 
   return (
     <div>
+    {console.log(personId)}
       <h4>{label}</h4>
       <FormControl className={classes.formControl}>
         <Col>
@@ -134,41 +143,44 @@ const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, company
             />
           </Row>
           <Row>
-            <InputLabel className={classes.label} id="demo-controlled-open-select-label">Empresa</InputLabel>
-            <Select
-              className={classes.select}
-              labelId="demo-controlled-open-select-label"
-              id="demo-controlled-open-select"
-              open={openEmpresa}
-              onClose={handleCloseEmpresa}
-              onOpen={handleOpenEmpresa}
-              value={values.empresa}
-              onChange={handleChange('personEmpresa')}
-            >
-            { 
-              companyList.map((item) => (
-                <MenuItem value={item.id}>{item.attributes.name}</MenuItem>
-              ))
-            }
-            </Select>
-
-            <InputLabel className={classes.label2} id="setor">Setor</InputLabel>
-            <Select
-              className={classes.select}
-              labelId="setor"
-              id="Setor"
-              open={openSector}
-              onClose={handleCloseSector}
-              onOpen={handleOpenSector}
-              value={values.setor}
-              onChange={handleChange('personSetor')}
+            <FormControl>
+              <InputLabel className={classes.label} id="company">Empresa</InputLabel>
+              <Select
+                className={classes.company}
+                labelId="company"
+                id="company"
+                open={openEmpresa}
+                onClose={handleCloseEmpresa}
+                onOpen={handleOpenEmpresa}
+                value={values.empresa}
+                onChange={() => handleChange('personEmpresa')}
               >
-            { 
-              sectorList.map((item) => (
-                <MenuItem value={item.id}>{item.attributes.name}</MenuItem>
+              { 
+                companyList.map((item) => (
+                  <MenuItem value={item.id}>{item.attributes.name}</MenuItem>
                 ))
               }
-            </Select>
+              </Select>
+            </FormControl>
+            <FormControl>
+              <InputLabel className={classes.label2} id="Setor">Setor</InputLabel>
+              <Select
+                className={classes.sector}
+                labelId="setor"
+                id="Setor"
+                open={openSector}
+                onClose={handleCloseSector}
+                onOpen={handleOpenSector}
+                value={values.setor}
+                onChange={() => handleChange('personSetor')}
+                >
+              { 
+                sectorList.map((item) => (
+                  <MenuItem value={item.id}>{item.attributes.name}</MenuItem>
+                ))
+              }
+              </Select>
+            </FormControl>
           </Row>
         </Col>
         <Button
@@ -179,21 +191,56 @@ const CreateOrUpdatePerson = ({ label, nome, cpf, email, empresa, setor, company
           className={classes.button}
           startIcon={<SaveIcon />}
           onClick={() => {
-            axios.post('http://localhost:3000/owners',
-            {  
-              'name': values.personNome,
-              'cpf': values.personCpf,
-              'email': values.personEmail,
-              'sector_id': values.personSetor,
-              'company_id': values.personEmpresa
-            })
-            .then(function(response){
-              
-            });   
+            if (values.personNome    === undefined ||
+                values.personCpf     === undefined ||
+                values.personEmail   === undefined ||
+                values.personSetor   === undefined ||
+                values.personEmpresa === undefined
+                ){
+              setEmptyField(true);
+              return;
+            }
+            if (!isEditing){
+              axios.post('http://localhost:3000/owners',
+              {  
+                'name': values.personNome,
+                'cpf': values.personCpf,
+                'email': values.personEmail,
+                'sector_id': values.personSetor,
+                'company_id': values.personEmpresa
+              }).then(function(response){
+                setSaved(true);
+                setSaveError(false);
+                setEmptyField(false);
+              }).catch(function (error) {
+                setSaved(false);
+                setSaveError(true);
+                setEmptyField(false);
+              });
+            }
+            else{
+              axios.patch(`http://localhost:3000/owners/${personId}`,
+              {  
+                'name': values.personNome,
+                'cpf': values.personCpf,
+                'email': values.personEmail,
+                'sector_id': values.personSetor,
+                'company_id': values.personEmpresa
+              }).then(function(response){
+                setSaved(true);
+                setSaveError(false);
+              }).catch(function (error) {
+                setSaved(false);
+                setSaveError(true);
+              });
+            }
           }}
         >
           Salvar
         </Button>
+        { saved && !saveError && (<Alert text="Salvo com sucesso!" />)}
+        { !saved && saveError && (<Alert text="Erro" />)}
+        { emptyField && (<Alert text="Todos os campos devem ser preenchidos!" />)}
         </FormControl>
     </div>
   );

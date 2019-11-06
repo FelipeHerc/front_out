@@ -88,7 +88,7 @@ class Person extends Component{
                     </Button>
                   </ButtonBox>
                   <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllPerson()} center>
-                    <CreateOrUpdatePerson label="Criar funcionário" companyList={company} sectorList={sector}/>
+                    <CreateOrUpdatePerson isEditing={false} label="Criar funcionário" companyList={company} sectorList={sector}/>
                   </Modal>
                 </Row>
                 {
@@ -98,8 +98,11 @@ class Person extends Component{
                       id={item.id}
                       name={item.attributes.name} 
                       cpf={item.attributes.cpf} 
+                      email={item.attributes.email}
                       company_name={item.attributes.company.name}
                       sector_name={item.attributes.sector.name}
+                      company={item.attributes.company.id}
+                      sector={item.attributes.sector.id}
                       companyList={company} 
                       sectorList={sector}
                     />
