@@ -5,6 +5,9 @@ import { FaTag } from "react-icons/fa";
 import { FaBox } from "react-icons/fa";
 import { FaLock } from "react-icons/fa";
 import { MdPhonelinkSetup } from "react-icons/md";
+import Modal from 'react-responsive-modal';
+import Button from '@material-ui/core/Button';
+import { CreateOrUpdateCel } from '../../components'
 
 const ButtonBox = styled.div`
   margin-left: 10px;
@@ -73,7 +76,7 @@ const Text = styled.div`
   margin: 0 10px 0 0;
 `;
 
-const CelCard = ({ id, brand, model, imei1, imei2, statId, stat }) => {
+const CelCard = ({ id, brand, model, imei1, imei2, statId, stat, statList }) => {
   const [open, setOpen] = useState(0);
   return (
     <StyledBox>
@@ -96,7 +99,33 @@ const CelCard = ({ id, brand, model, imei1, imei2, statId, stat }) => {
         </Col>
       </Row>
       <Row>
+      <ButtonBox>
+          <Button variant="contained" color="primary" size="small" onClick={
+          () => {
+            setOpen(true)
+          }
+          } >
+            Editar
+          </Button>
+        </ButtonBox>
+        <ButtonBox>
+          <Button variant="contained" color="secondary" size="small">
+            Deletar
+          </Button>
+        </ButtonBox>
+        <Modal open={open} onClose={() => setOpen(false)} center>
+          <CreateOrUpdateCel 
+            isEditing={false} 
+            label="Criar Smartphone" 
+            statList={statList}
+            brand={brand}
+            model={model}
+            imei1={imei1}
+            imei2={imei2}
+            statId={statId}
+          />
 
+        </Modal>
       </Row>
     </StyledBox>
   )

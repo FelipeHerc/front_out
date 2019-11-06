@@ -61,7 +61,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, empresa, setor, companyList, sectorList, history }) => {
+const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, empresa, setor, companyList, sectorList }) => {
   const classes = useStyles();
   const [saved, setSaved] = React.useState(false);
   const [emptyField, setEmptyField] = React.useState(false);
@@ -69,11 +69,11 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
   const [openEmpresa, setOpenEmpresa] = React.useState(false);
   const [openSector, setOpenSector] = React.useState(false);
   const [values, setValues] = React.useState({
-    personNome: nome,
-    personCpf: cpf,
-    personEmail: email,
-    personSetor: setor,
-    personEmpresa: empresa,
+    personNome: nome         || '',
+    personCpf: cpf           || '',
+    personEmail: email       || '',
+    personSetor: setor       || '',
+    personEmpresa: empresa   || '',
   });
 
   const handleChange = normalize => event => {
@@ -98,7 +98,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
 
   return (
     <div>
-    {console.log(personId)}
+    {(personId)}
       <h4>{label}</h4>
       <FormControl className={classes.formControl}>
         <Col>
@@ -187,7 +187,12 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
                 values.personCpf     === undefined ||
                 values.personEmail   === undefined ||
                 values.personSetor   === undefined ||
-                values.personEmpresa === undefined
+                values.personEmpresa === undefined ||
+                values.personNome    === '' ||
+                values.personCpf     === '' ||
+                values.personEmail   === '' ||
+                values.personSetor   === '' ||
+                values.personEmpresa === ''
                 ){
               setEmptyField(true);
               return;
@@ -221,9 +226,11 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
               }).then(function(response){
                 setSaved(true);
                 setSaveError(false);
+                setEmptyField(false);
               }).catch(function (error) {
                 setSaved(false);
                 setSaveError(true);
+                setEmptyField(false);
               });
             }
           }}

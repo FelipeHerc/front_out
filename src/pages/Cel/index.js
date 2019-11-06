@@ -1,8 +1,9 @@
 import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getAllCel } from '../../store/modules/getCel';
+import { getAllStat } from '../../store/modules/getStat';
 import { array } from 'prop-types';
-import { CelCard, Loader } from '../../components'
+import { CelCard, Loader, CreateOrUpdateCel } from '../../components'
 import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import Modal from 'react-responsive-modal';
@@ -51,6 +52,7 @@ class Cel extends Component{
 
   componentDidMount() {
     this.props.getAllCel();
+    this.props.getAllStat();
   }
   render()
   {
@@ -65,38 +67,39 @@ class Cel extends Component{
     }
     const { open } = this.state;
     const { cel, loaded, loading } = this.props;
-    console.log(loading);
-    console.log(cel)
+    const { stat, loadedStat, loadingStat } = this.props;
+
     return (
         <Fragment>
           {
-            loading ? <Loader/> : (
+            (loading && loadingStat) ? <Loader/> : (
               <StyledListBox>
                 <Row>
                   <H2>Smartphones</H2>
                   <ButtonBox>
-                    <Button variant="outlined" color="primary" size="small" className={classes.button} onClick={this.onOpenModal}>
+                    <Button variant="outlined" color="primary" size="small" className={classes.button.toString()} onClick={this.onOpenModal}>
                       Criar novo Smartphone
                     </Button>
                   </ButtonBox>
                   <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllCel()} center>
-                    aa
+                    <CreateOrUpdateCel isEditing={false} label="Criar Smartphone" statList={stat} />
                   </Modal>
                 </Row>
                 {
                   cel.map((item) => (
                     <CelCard 
                       id={item.id}
+                      key={item.id}
                       brand={item.attributes.brand}
                       imei1={item.attributes.imei1}
                       imei2={item.attributes.imei2}
                       model={item.attributes.model}
                       statId={item.attributes.stat.id}
                       stat={item.attributes.stat.description}
+                      statList={stat}
                     />
                   ))
                 }
-                
               </StyledListBox>
             )
           }
@@ -109,17 +112,23 @@ class Cel extends Component{
 
 Cel.defaultProps = {
   cel: [],
+  stat: [],
 };
 
 Cel.propTypes = {
   cel: array,
+  stat: array,
 };
 
-const mapStateToProps = ({ cel: { cel, getAllCel, loaded, loading } }) => ({
+const mapStateToProps = ({ cel: { cel, getAllCel, loaded, loading }, stat: { loadedStat, loadingStat, errorStat, stat }} ) => ({
   cel,
   getAllCel,
   loaded,
   loading,
+  stat,
+  loadedStat, 
+  loadingStat, 
+  errorStat, 
 });
 
-export default connect(mapStateToProps, { getAllCel } )(Cel);
+export default connect(mapStateToProps, { getAllCel, getAllStat } )(Cel);
