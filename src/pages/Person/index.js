@@ -57,6 +57,7 @@ class Person extends Component{
   onCloseModal = () => {
     this.setState({ open: false });
   };
+  
   render()
   {
     const classes = {

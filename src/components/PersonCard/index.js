@@ -36,6 +36,7 @@ const PersonIcon = styled(FaUserAlt)`
 `;
 
 const MailIcon = styled(FaMailBulk)`
+  margin-left: 10px;
   margin-right: 10px;
   width: 12px;
   height: 12px;
@@ -49,6 +50,7 @@ const KeyIcon = styled(FaKey)`
 
 const CompanyIcon = styled(FaIndustry)`
   margin-right: 10px;
+  margin-left: 10px;
   width: 12px;
   height: 12px;
 `;

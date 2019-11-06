@@ -5,15 +5,12 @@ import { NotFound, Equips, Home, Person, Notebook, Cel, Chip } from '../pages';
 
 export const Routes = () => (
   <Switch>
-    <Route exact path="/notebook" component={Notebook} />
+    <Route exact path="/notebooks" component={Notebook} />
     <Route exact path="/chips" component={Chip} />
     <Route exact path="/equips" component={Equips} />
     <Route exact path="/cels" component={Cel} />
     <Route exact path="/" component={Home} />
     <Route exact path="/person" component={Person} />
-    {/* <Route exact path="/processos-seletivos" component={Vacancies} />
-    <Route exact path="/introducao-assistente" component={Intro} />
-    <Route path="/processos-seletivos/:processoSeletivoId/cadastrar" component={SelectiveProcessForm} /> */}
     <Route component={NotFound} />
   </Switch>
 );

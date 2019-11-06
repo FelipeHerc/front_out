@@ -7,3 +7,4 @@ export { default as Button } from './Button';
 export { default as CreateOrUpdatePerson } from './CreateOrUpdatePerson';
 export { default as Alert } from './Alert';
 export { default as Side } from './Side';
+export { default as CelCard } from './CelCard';

@@ -53,14 +53,6 @@ const useStyles = makeStyles(theme => ({
     marginRight: theme.spacing(1),
     width: 400,
   },
-  label: {
-    // marginTop: 160,
-    // marginLeft: 7,    
-  },
-  label2: {
-    // marginTop: 160,
-    // marginLeft: 224,    
-  },
   dense: {
     marginTop: 19,
   },
@@ -144,7 +136,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
           </Row>
           <Row>
             <FormControl>
-              <InputLabel className={classes.label} id="company">Empresa</InputLabel>
+              <InputLabel id="company">Empresa</InputLabel>
               <Select
                 className={classes.company}
                 labelId="company"
@@ -163,7 +155,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
               </Select>
             </FormControl>
             <FormControl>
-              <InputLabel className={classes.label2} id="Setor">Setor</InputLabel>
+              <InputLabel id="Setor">Setor</InputLabel>
               <Select
                 className={classes.sector}
                 labelId="setor"

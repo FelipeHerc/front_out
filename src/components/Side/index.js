@@ -3,9 +3,11 @@ import React from 'react';
 import styled from 'styled-components'; 
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import { FaUserTie } from "react-icons/fa";
+import { FaSimCard } from "react-icons/fa";
 import { FaHome } from "react-icons/fa";
 import { withRouter } from 'react-router-dom';
 import { MdPhoneAndroid } from "react-icons/md";
+import { MdLaptop } from "react-icons/md";
 
 const SideBar = styled.div`
   position: sticky;
@@ -23,8 +25,19 @@ const PersonIcon = styled(FaUserTie)`
   margin: 0 0 10px 0;
 `;
 
+const ChipIcon = styled(FaSimCard)`
+  width: 25px;
+  height: 25px;
+  margin: 0 0 10px 0;
+`;
 
-const EquipIcon = styled(MdPhoneAndroid)`
+const CelIcon = styled(MdPhoneAndroid)`
+  width: 27px;
+  height: 27px;
+  margin: 0 0 10px 0;
+`;
+
+const NotebookIcon = styled(MdLaptop)`
   width: 27px;
   height: 27px;
   margin: 0 0 10px 0;
@@ -61,13 +74,40 @@ const Side = ({history}) => {
                     <PersonIcon />
                 </NavIcon>
                 <NavText>
-                    Home
+                    Funcionários
                 </NavText>
             </NavItem>
-            <NavItem eventKey="equip">
+            <NavItem eventKey="cel" onClick={() => history.replace('/cels')}>
+                <NavIcon>
+                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                    <CelIcon/>
+                </NavIcon>
+                <NavText>
+                    Smartphones
+                </NavText>
+            </NavItem>
+            <NavItem eventKey="chip" onClick={() => history.replace('/chips')}>
+                <NavIcon>
+                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                    <ChipIcon/>
+                </NavIcon>
+                <NavText>
+                    Chips
+                </NavText>
+            </NavItem>
+            <NavItem eventKey="notebook" onClick={() => history.replace('/notebooks')}>
+                <NavIcon>
+                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                    <NotebookIcon/>
+                </NavIcon>
+                <NavText>
+                    Notebooks
+                </NavText>
+            </NavItem>
+            {/* <NavItem eventKey="equip">
                 <NavIcon>
                     <i className="fa fa-fw fa-line-chart" style={{ fontSize: '1.75em' }} />
-                    <EquipIcon/>
+                    <CelIcon/>
                 </NavIcon>
                 <NavText>
                     Equipamentos
@@ -77,7 +117,7 @@ const Side = ({history}) => {
                         Todos
                     </NavText>
                 </NavItem>
-                <NavItem eventKey="equip/phone">
+                <NavItem eventKey="equip/phone" onClick={() => history.replace('/cels')}>
                     <NavText>
                         Smartphones
                     </NavText>
@@ -92,7 +132,7 @@ const Side = ({history}) => {
                         Notebooks
                     </NavText>
                 </NavItem>
-            </NavItem>
+            </NavItem> */}
         </SideNav.Nav>
     </SideNav>
     </SideBar>
