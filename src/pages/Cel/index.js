@@ -66,8 +66,8 @@ class Cel extends Component{
       }
     }
     const { open } = this.state;
-    const { cel, loaded, loading } = this.props;
-    const { stat, loadedStat, loadingStat } = this.props;
+    const { cel, loading } = this.props;
+    const { stat, loadingStat } = this.props;
 
     return (
         <Fragment>

@@ -9,3 +9,5 @@ export { default as Alert } from './Alert';
 export { default as Side } from './Side';
 export { default as CelCard } from './CelCard';
 export { default as CreateOrUpdateCel } from './CreateOrUpdateCel';
+export { default as CreateOrUpdateChip } from './CreateOrUpdateChip';
+export { default as ChipCard } from './ChipCard';

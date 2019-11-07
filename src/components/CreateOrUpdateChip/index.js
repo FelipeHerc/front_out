@@ -56,17 +56,17 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2, statList, statId }) => {
+const CretaOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumber, value, statList, statId }) => {
   const classes = useStyles();
   const [saved, setSaved] = React.useState(false);
   const [emptyField, setEmptyField] = React.useState(false);
   const [saveError, setSaveError] = React.useState(false);
   const [values, setValues] = React.useState({
-    celBrand: brand || '',
-    celModel: model || '',
-    celImei1: imei1 || '',
-    celImei2: imei2 || '',
-    celStat: statId || '',
+    chipOperator: operator || '',
+    chipDDD: ddd || '',
+    chipPhoneNumber: phoneNumber || '',
+    chipValue: value || '',
+    chipStat: statId || '',
   });
 
   const handleChange = normalize => event => {
@@ -80,41 +80,41 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
         <Col>
           <Row>
             <TextField
-              id="brand"
-              label="Marca"
+              id="operator"
+              label="Operadora"
               className={classes.textField.toString()}
-              value={values.celBrand}
-              onChange={handleChange('celBrand')}
+              value={values.chipOperator}
+              onChange={handleChange('chipOperator')}
               margin="normal"
             />
             <TextField
-              id="model"
-              label="Modelo"
+              id="ddd"
+              label="DDD"
               className={classes.textField.toString()}
-              value={values.celModel}
-              onChange={handleChange('celModel')}
+              value={values.chipDDD}
+              onChange={handleChange('chipDDD')}
               margin="normal"
             />
           </Row>
 
           <Row>
             <TextField     
-              id="imei1"
-              label="Imei 1"
+              id="phoneNumber"
+              label="Número"
               className={classes.textFieldBig.toString()}
-              value={values.celImei1}
-              onChange={handleChange('celImei1')}
+              value={values.chipPhoneNumber}
+              onChange={handleChange('chipPhoneNumber')}
               margin="normal"
             />
           </Row>
           
           <Row>
             <TextField    
-              id="imei2"
-              label="Imei 2"
+              id="value"
+              label="Valor"
               className={classes.textFieldBig.toString()}
-              value={values.celImei2}
-              onChange={handleChange('celImei2')}
+              value={values.chipValue}
+              onChange={handleChange('chipValue')}
               margin="normal"
             />
           </Row>
@@ -122,7 +122,7 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
           <StatBox>
             <h4>Status:</h4>
             <Row>
-              <RadioGroup aria-label="position" name="position" value={values.celStat} onChange={handleChange('celStat')}>
+              <RadioGroup aria-label="position" name="position" value={values.chipStat} onChange={handleChange('chipStat')}>
                 {
                   statList.map((item) => (
                     <FormControlLabel
@@ -131,7 +131,7 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
                       control={<Radio color="primary" />}
                       label={item.attributes.description}
                       labelPlacement="end" // eslint-disable-next-line
-                      checked={values.celStat == item.id} 
+                      checked={values.chipStat == item.id}
                   />
                   ))
                 }
@@ -147,29 +147,29 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
           className={classes.button.toString()}
           startIcon={<SaveIcon />}
           onClick={() => {
-            if (values.celBrand === undefined ||
-                values.celModel === undefined ||
-                values.celImei1 === undefined ||
-                values.celImei2 === undefined ||
-                values.celStat  === undefined ||
-                values.celBrand === '' ||
-                values.celModel === '' ||
-                values.celImei1 === '' ||
-                values.celImei2 === '' ||
-                values.celStat  === ''
+            if (values.chipOperator    === undefined ||
+                values.chipDDD         === undefined ||
+                values.chipPhoneNumber === undefined ||
+                values.chipValue       === undefined ||
+                values.chipStat        === undefined ||
+                values.chipOperator    === '' ||
+                values.chipDDD         === '' ||
+                values.chipPhoneNumber === '' ||
+                values.chipValue       === '' ||
+                values.chipStat        === ''
                 ){
               setSaved(false);
               setEmptyField(true);
               return;
             }
             if (!isEditing){
-              axios.post('http://localhost:3000/cels',
+              axios.post('http://localhost:3000/chips',
               {  
-                "brand": values.celBrand,
-                "model": values.celModel,
-                "imei1": values.celImei1,
-                "imei2": values.celImei2,
-                "stat_id": values.celStat,
+                "operator": values.chipOperator,
+                "ddd": values.chipDDD,
+                "phoneNumber": values.chipPhoneNumber,
+                "value": values.chipValue,
+                "stat_id": values.chipStat,
               }).then(function(response){
                 setSaved(true);
                 setSaveError(false);
@@ -181,13 +181,13 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
               });
             }
             else{
-              axios.patch(`http://localhost:3000/cels/${celId}`,
+              axios.patch(`http://localhost:3000/chips/${chipId}`,
               {  
-                "brand": values.celBrand,
-                "model": values.celModel,
-                "imei1": values.celImei1,
-                "imei2": values.celImei2,
-                "stat_id": values.celStat,
+                "operator": values.chipOperator,
+                "ddd": values.chipDDD,
+                "phoneNumber": values.chipPhoneNumber,
+                "value": values.chipValue,
+                "stat_id": values.chipStat,
               }).then(function(response){
                 setSaved(true);
                 setSaveError(false);
@@ -210,12 +210,12 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
   );
 }
 
-CreateOrUpdateCel.propTypes = {
-  brand: string,
-  model: string,
-  imei1: string,
-  imei2: string,
+CretaOrUpdateChip.propTypes = {
+  operator: string,
+  ddd: string,
+  phoneNumber: string,
+  value: string,
   statList: array,
   label: string,
 }
-export default withRouter(CreateOrUpdateCel);
+export default withRouter(CretaOrUpdateChip);

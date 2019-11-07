@@ -3,10 +3,8 @@ import { Alert } from '../../components';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { string, array } from 'prop-types';
-import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import styled from 'styled-components'; 
-import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { withRouter } from 'react-router-dom';
@@ -18,12 +16,6 @@ import axios from 'axios';
 const Col = styled.div`
   display: flex;
   flex-direction: column;
-`
-const Box = styled.div`
-  border: 1px solid #3F51B5;
-  margin: 10px 23px 10px 8px;
-  padding: 15px 15px 10px 15px;
-  border-radius: 7px;
 `
 
 const RadioBox = styled.div`
@@ -90,8 +82,6 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
   const [saved, setSaved] = React.useState(false);
   const [emptyField, setEmptyField] = React.useState(false);
   const [saveError, setSaveError] = React.useState(false);
-  const [openEmpresa, setOpenEmpresa] = React.useState(false);
-  const [openSector, setOpenSector] = React.useState(false);
   const [values, setValues] = React.useState({
     personNome: nome         || '',
     personCpf: cpf           || '',
@@ -108,13 +98,13 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
   return (
     <div>
       <h4>{label}</h4>
-      <FormControl className={classes.formControl}>
+      <FormControl className={classes.formControl.toString()}>
         <Col>
           <Row>
             <TextField
               id="nome"
               label="Nome"
-              className={classes.textFieldBig}
+              className={classes.textFieldBig.toString()}
               value={values.personNome}
               onChange={handleChange('personNome')}
               margin="normal"
@@ -128,7 +118,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
               }}        
               id="cpf"
               label="Cpf"
-              className={classes.textField}
+              className={classes.textField.toString()}
               value={values.personCpf}
               onChange={handleChange('personCpf')}
               margin="normal"
@@ -136,7 +126,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
             <TextField
               id="email"
               label="Email"
-              className={classes.textField}
+              className={classes.textField.toString()}
               value={values.personEmail}
               onChange={handleChange('personEmail')}
               margin="normal"
@@ -154,7 +144,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
                         value={item.id}
                         control={<Radio color="primary" />}
                         label={item.attributes.name}
-                        labelPlacement="end"
+                        labelPlacement="end" // eslint-disable-next-line 
                         checked={values.personEmpresa == item.id}
                     />
                     ))
@@ -171,7 +161,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
                         value={item.id}
                         control={<Radio color="primary" />}
                         label={item.attributes.name}
-                        labelPlacement="end"
+                        labelPlacement="end" // eslint-disable-next-line 
                         checked={values.personSetor == item.id}
                     />
                     ))
@@ -186,7 +176,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
           variant="contained"
           color="primary"
           size="large"
-          className={classes.button}
+          className={classes.button.toString()}
           startIcon={<SaveIcon />}
           onClick={() => {
             if (values.personNome    === undefined ||
@@ -200,6 +190,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
                 values.personSetor   === '' ||
                 values.personEmpresa === ''
                 ){
+              setSaved(false);
               setEmptyField(true);
               return;
             }

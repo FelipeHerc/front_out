@@ -7,7 +7,6 @@ import { array } from 'prop-types';
 import { PersonCard, Loader, CreateOrUpdatePerson } from '../../components'
 import styled from 'styled-components';
 import Modal from 'react-responsive-modal';
-import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 
 const ButtonBox = styled.div`
@@ -88,7 +87,7 @@ class Person extends Component{
                       Criar novo funcionário
                     </Button>
                   </ButtonBox>
-                  <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllPerson()} center>
+                  <Modal open={Boolean(open)} onClose={this.onCloseModal} onExited={() => this.props.getAllPerson()} center>
                     <CreateOrUpdatePerson isEditing={false} label="Criar funcionário" companyList={company} sectorList={sector}/>
                   </Modal>
                 </Row>

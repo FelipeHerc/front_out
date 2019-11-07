@@ -115,7 +115,7 @@ const PersonCard = ({id, name, cpf, email, company_name, sector_name, companyLis
             Deletar
           </Button>
         </ButtonBox>
-        <Modal open={open} onClose={() => setOpen(false)} center>
+        <Modal open={Boolean(open)} onClose={() => setOpen(false)} center>
           <CreateOrUpdatePerson
             personId={id}
             isEditing={true}
