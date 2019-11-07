@@ -43,8 +43,11 @@ const NotebookIcon = styled(MdLaptop)`
   margin: 0 0 10px 0;
 `;
 
-const Side = ({history}) => {
+const segmentURL = () => {
+    return window.location.pathname.split("/").pop();
+}
 
+const Side = ({history}) => {
   return(
     <SideBar>
     <SideNav
@@ -58,7 +61,7 @@ const Side = ({history}) => {
           }}
     >
         <SideNav.Toggle />
-        <SideNav.Nav defaultSelected="home">
+        <SideNav.Nav defaultSelected={segmentURL()}>
             <NavItem eventKey="home" onClick={() => history.replace('/')}>
                 <NavIcon>
                     <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
@@ -68,7 +71,7 @@ const Side = ({history}) => {
                     Home
                 </NavText>
             </NavItem>
-            <NavItem eventKey="person" onClick={() => history.replace('/person')}>
+            <NavItem eventKey="persons" onClick={() => history.replace('/persons')}>
                 <NavIcon>
                     <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                     <PersonIcon />
@@ -77,7 +80,7 @@ const Side = ({history}) => {
                     Funcionários
                 </NavText>
             </NavItem>
-            <NavItem eventKey="cel" onClick={() => history.replace('/cels')}>
+            <NavItem eventKey="cels" onClick={() => history.replace('/cels')}>
                 <NavIcon>
                     <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                     <CelIcon/>
@@ -86,7 +89,7 @@ const Side = ({history}) => {
                     Smartphones
                 </NavText>
             </NavItem>
-            <NavItem eventKey="chip" onClick={() => history.replace('/chips')}>
+            <NavItem eventKey="chips" onClick={() => history.replace('/chips')}>
                 <NavIcon>
                     <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                     <ChipIcon/>
@@ -95,7 +98,7 @@ const Side = ({history}) => {
                     Chips
                 </NavText>
             </NavItem>
-            <NavItem eventKey="notebook" onClick={() => history.replace('/notebooks')}>
+            <NavItem eventKey="notebooks" onClick={() => history.replace('/notebooks')}>
                 <NavIcon>
                     <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                     <NotebookIcon/>
