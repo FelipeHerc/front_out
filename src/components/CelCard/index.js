@@ -113,7 +113,7 @@ const CelCard = ({ id, brand, model, imei1, imei2, statId, stat, statList }) => 
             Deletar
           </Button>
         </ButtonBox>
-        <Modal open={open} onClose={() => setOpen(false)} center>
+        <Modal open={Boolean(open)} onClose={() => setOpen(false)} center>
           <CreateOrUpdateCel 
             isEditing={false} 
             label="Criar Smartphone" 
