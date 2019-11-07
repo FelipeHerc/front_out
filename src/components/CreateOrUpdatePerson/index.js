@@ -93,8 +93,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
   const handleChange = normalize => event => {
     setValues({ ...values, [normalize]: event.target.value });
   };
-  console.log(sectorList);
-  console.log('cara');
+
   return (
     <div>
       <h4>{label}</h4>
