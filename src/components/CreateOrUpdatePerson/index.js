@@ -3,7 +3,6 @@ import { Alert } from '../../components';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { string, array } from 'prop-types';
-import Select from '@material-ui/core/Select';
 import MenuItem from '@material-ui/core/MenuItem';
 import FormControl from '@material-ui/core/FormControl';
 import styled from 'styled-components'; 
@@ -11,16 +10,41 @@ import InputLabel from '@material-ui/core/InputLabel';
 import Button from '@material-ui/core/Button';
 import SaveIcon from '@material-ui/icons/Save';
 import { withRouter } from 'react-router-dom';
+import Radio from '@material-ui/core/Radio';
+import RadioGroup from '@material-ui/core/RadioGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
 import axios from 'axios';
 
 const Col = styled.div`
   display: flex;
   flex-direction: column;
 `
+const Box = styled.div`
+  border: 1px solid #3F51B5;
+  margin: 10px 23px 10px 8px;
+  padding: 15px 15px 10px 15px;
+  border-radius: 7px;
+`
+
+const RadioBox = styled.div`
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: auto;
+`
 
 const Row = styled.div`
   display: flex;
   flex-direction: row;
+`
+
+const Sector = styled.div`
+  margin: 20px 0 0 20px;
+
+`
+
+const Company = styled.div`
+  margin: 20px 20px 0 0;
 `
 
 const useStyles = makeStyles(theme => ({
@@ -79,26 +103,10 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
   const handleChange = normalize => event => {
     setValues({ ...values, [normalize]: event.target.value });
   };
-
-  const handleCloseEmpresa = () => {
-    setOpenEmpresa(false);
-  };
-
-  const handleOpenEmpresa  = () => {
-    setOpenEmpresa(true);
-  };
-
-  const handleCloseSector = () => {
-    setOpenSector(false);
-  };
-
-  const handleOpenSector = () => {
-    setOpenSector(true);
-  };
-
+  console.log(sectorList);
+  console.log('cara');
   return (
     <div>
-    {(personId)}
       <h4>{label}</h4>
       <FormControl className={classes.formControl}>
         <Col>
@@ -135,44 +143,42 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
             />
           </Row>
           <Row>
-            <FormControl>
-              <InputLabel id="company">Empresa</InputLabel>
-              <Select
-                className={classes.company}
-                labelId="company"
-                id="company"
-                open={openEmpresa}
-                onClose={handleCloseEmpresa}
-                onOpen={handleOpenEmpresa}
-                value={values.empresa}
-                onChange={() => handleChange('personEmpresa')}
-              >
-              { 
-                companyList.map((item) => (
-                  <MenuItem value={item.id}>{item.attributes.name}</MenuItem>
-                ))
-              }
-              </Select>
-            </FormControl>
-            <FormControl>
-              <InputLabel id="Setor">Setor</InputLabel>
-              <Select
-                className={classes.sector}
-                labelId="setor"
-                id="Setor"
-                open={openSector}
-                onClose={handleCloseSector}
-                onOpen={handleOpenSector}
-                value={values.setor}
-                onChange={() => handleChange('personSetor')}
-                >
-              { 
-                sectorList.map((item) => (
-                  <MenuItem value={item.id}>{item.attributes.name}</MenuItem>
-                ))
-              }
-              </Select>
-            </FormControl>
+            <RadioBox>
+              <Company>
+                <h6>Empresa:</h6>
+                <RadioGroup aria-label="position" name="position" value={values.personEmpresa} onChange={handleChange('personEmpresa')}>
+                  {
+                    companyList.map((item) => (
+                      <FormControlLabel
+                        key={item.id}
+                        value={item.id}
+                        control={<Radio color="primary" />}
+                        label={item.attributes.name}
+                        labelPlacement="end"
+                        checked={values.personEmpresa == item.id}
+                    />
+                    ))
+                  }
+                </RadioGroup>
+              </Company>
+              <Sector>
+                <h6>Setor:</h6>
+                <RadioGroup aria-label="position" name="position" value={values.personSetor} onChange={handleChange('personSetor')}>
+                  {
+                    sectorList.map((item) => (
+                      <FormControlLabel
+                        key={item.id}
+                        value={item.id}
+                        control={<Radio color="primary" />}
+                        label={item.attributes.name}
+                        labelPlacement="end"
+                        checked={values.personSetor == item.id}
+                    />
+                    ))
+                  }
+                </RadioGroup>
+              </Sector>
+            </RadioBox>
           </Row>
         </Col>
         <Button

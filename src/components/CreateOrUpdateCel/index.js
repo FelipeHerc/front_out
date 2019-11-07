@@ -32,7 +32,6 @@ const StatBox = styled.div`
   border-radius: 7px;
 `
 
-
 const useStyles = makeStyles(theme => ({
   button: {
     marginTop: 25
