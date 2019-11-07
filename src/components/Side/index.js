@@ -8,6 +8,7 @@ import { FaHome } from "react-icons/fa";
 import { withRouter } from 'react-router-dom';
 import { MdPhoneAndroid } from "react-icons/md";
 import { MdLaptop } from "react-icons/md";
+import { FaHands } from "react-icons/fa";
 
 const SideBar = styled.div`
   position: sticky;
@@ -38,6 +39,12 @@ const CelIcon = styled(MdPhoneAndroid)`
 `;
 
 const NotebookIcon = styled(MdLaptop)`
+  width: 27px;
+  height: 27px;
+  margin: 0 0 10px 0;
+`;
+
+const OwnershipIcon = styled(FaHands)`
   width: 27px;
   height: 27px;
   margin: 0 0 10px 0;
@@ -102,6 +109,15 @@ const Side = ({history}) => {
                 <NavIcon>
                     <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
                     <NotebookIcon/>
+                </NavIcon>
+                <NavText>
+                    Notebooks
+                </NavText>
+            </NavItem>
+            <NavItem eventKey="ownerships" onClick={() => history.replace('/ownerships')}>
+                <NavIcon>
+                    <i className="fa fa-fw fa-home" style={{ fontSize: '1.75em' }} />
+                    <OwnershipIcon/>
                 </NavIcon>
                 <NavText>
                     Notebooks
