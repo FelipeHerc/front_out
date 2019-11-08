@@ -69,12 +69,12 @@ class Person extends Component{
       }
     }
     const { open } = this.state;
-    const { person, company, sector, loading, loadingCompany, loadingSector } = this.props;
+    const { person, company, sector, loadingPerson, loadingCompany, loadingSector } = this.props;
 
     return (
       <Fragment>
         {
-          (loading || loadingCompany || loadingSector) ? 
+          (loadingPerson || loadingCompany || loadingSector) ? 
             (
               <Loader />
             ) :
@@ -130,14 +130,14 @@ Person.propTypes = {
 
 const mapStateToProps = (
   { 
-    person: { person, getAllPerson, loaded, loading }, 
+    person: { person, getAllPerson, loadedPerson, loadingPerson }, 
     company: { company, getAllCompany, loadedCompany, loadingCompany },
     sector: { sector, getAllSector, loadedSector, loadingSector },
   }) => ({
   person,
   getAllPerson,
-  loaded,
-  loading,
+  loadedPerson,
+  loadingPerson,
   company, 
   getAllCompany, 
   loadedCompany, 

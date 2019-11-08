@@ -66,13 +66,13 @@ class Chip extends Component{
       }
     }
     const { open } = this.state;
-    const { chip, loading } = this.props;
+    const { chip, loadingChip } = this.props;
     const { stat, loadingStat } = this.props;
 
     return (
         <Fragment>
           {
-            (loading && loadingStat) ? <Loader/> : (
+            (loadingChip && loadingStat) ? <Loader/> : (
               <StyledListBox>
                 <Row>
                   <H2>Chips</H2>
@@ -120,11 +120,11 @@ Chip.propTypes = {
   stat: array,
 };
 
-const mapStateToProps = ({ chip: { chip, getAllChip, loaded, loading }, stat: { loadedStat, loadingStat, errorStat, stat }} ) => ({
+const mapStateToProps = ({ chip: { chip, getAllChip, loadedChip, loadingChip }, stat: { loadedStat, loadingStat, errorStat, stat }} ) => ({
   chip,
   getAllChip,
-  loaded,
-  loading,
+  loadedChip,
+  loadingChip,
   stat,
   loadedStat, 
   loadingStat, 

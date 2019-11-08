@@ -10,9 +10,9 @@ const TYPES = {
 };
 
 const initialState = {
-  loaded: false,
-  loading: false,
-  error: false,
+  loadedPerson: false,
+  loadingPerson: false,
+  errorPerson: false,
   person: [],
 }
 
@@ -24,41 +24,41 @@ export const reducer = (
     case TYPES.GET_PERSON:
       return {
         ...state,
-        loading: true,
-        loaded: false,
+        loadingPerson: true,
+        loadedPerson: false,
       };
     case TYPES.GET_PERSON_SUCCESS:
       return {
         ...state,
-        loading: false,
-        loaded: true,
+        loadingPerson: false,
+        loadedPerson: true,
         person: result.data.data,
       };
     case TYPES.GET_CURRICULUM_ERROR:
       return {
         ...state,
-        loading: false,
-        loaded: false,
-        error: true,
+        loadingPerson: false,
+        loadedPerson: false,
+        errorPerson: true,
       };
       case TYPES.POST_PERSON:
         return {
           ...state,
-          loading: true,
-          loaded: false,
+          loadingPerson: true,
+          loadedPerson: false,
         };
       case TYPES.POST_PERSON_SUCCESS:
         return {
           ...state,
-          loading: false,
-          loaded: true,
+          loadingPerson: false,
+          loadedPerson: true,
         };
       case TYPES.POST_CURRICULUM_ERROR:
         return {
           ...state,
-          loading: false,
-          loaded: false,
-          error: true,
+          loadingPerson: false,
+          loadedPerson: false,
+          errorPerson: true,
         };
 
     default:

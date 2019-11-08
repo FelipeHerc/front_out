@@ -66,13 +66,13 @@ class Notebook extends Component{
       }
     }
     const { open } = this.state;
-    const { notebook, loading } = this.props;
+    const { notebook, loadingNotebook } = this.props;
     const { stat, loadingStat } = this.props;
 
     return (
       <Fragment>
         {
-          (loading && loadingStat) ? <Loader/> : (
+          (loadingNotebook && loadingStat) ? <Loader/> : (
             <StyledListBox>
               <Row>
                 <H2>Notebooks</H2>
@@ -117,11 +117,11 @@ Notebook.propTypes = {
   stat: array,
 };
 
-const mapStateToProps = ({ notebook: { notebook, getAllNotebook, loaded, loading }, stat: { loadedStat, loadingStat, errorStat, stat }} ) => ({
+const mapStateToProps = ({ notebook: { notebook, getAllNotebook, loadedNotebook, loadingNotebook }, stat: { loadedStat, loadingStat, errorStat, stat }} ) => ({
   notebook,
   getAllNotebook,
-  loaded,
-  loading,
+  loadedNotebook,
+  loadingNotebook,
   stat,
   loadedStat, 
   loadingStat, 

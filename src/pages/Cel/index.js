@@ -66,13 +66,13 @@ class Cel extends Component{
       }
     }
     const { open } = this.state;
-    const { cel, loading } = this.props;
+    const { cel, loadingCel } = this.props;
     const { stat, loadingStat } = this.props;
 
     return (
         <Fragment>
           {
-            (loading && loadingStat) ? <Loader/> : (
+            (loadingCel && loadingStat) ? <Loader/> : (
               <StyledListBox>
                 <Row>
                   <H2>Smartphones</H2>
@@ -120,11 +120,11 @@ Cel.propTypes = {
   stat: array,
 };
 
-const mapStateToProps = ({ cel: { cel, getAllCel, loaded, loading }, stat: { loadedStat, loadingStat, errorStat, stat }} ) => ({
+const mapStateToProps = ({ cel: { cel, getAllCel, loadedCel, loadingCel }, stat: { loadedStat, loadingStat, errorStat, stat }} ) => ({
   cel,
   getAllCel,
-  loaded,
-  loading,
+  loadedCel,
+  loadingCel,
   stat,
   loadedStat, 
   loadingStat, 

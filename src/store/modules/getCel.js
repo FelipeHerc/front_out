@@ -6,9 +6,9 @@ const TYPES = {
 };
 
 const initialState = {
-  loaded: false,
-  loading: false,
-  error: false,
+  loadedCel: false,
+  loadingCel: false,
+  errorCel: false,
   cel: [],
 }
 
@@ -20,22 +20,22 @@ export const reducer = (
     case TYPES.GET_CEL:
       return {
         ...state,
-        loading: true,
-        loaded: false,
+        loadingCel: true,
+        loadedCel: false,
       };
     case TYPES.GET_CEL_SUCCESS:
       return {
         ...state,
-        loading: false,
-        loaded: true,
+        loadingCel: false,
+        loadedCel: true,
         cel: result.data.data,
       };
     case TYPES.GET_CURRICULUM_ERROR:
       return {
         ...state,
-        loading: false,
-        loaded: false,
-        error: true,
+        loadingCel: false,
+        loadedCel: false,
+        errorCel: true,
       };
 
     default:

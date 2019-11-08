@@ -120,7 +120,7 @@ const Side = ({history}) => {
                     <OwnershipIcon/>
                 </NavIcon>
                 <NavText>
-                    Notebooks
+                    Posses
                 </NavText>
             </NavItem>
             {/* <NavItem eventKey="equip">

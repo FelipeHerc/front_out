@@ -6,9 +6,9 @@ const TYPES = {
 };
 
 const initialState = {
-  loaded: false,
-  loading: false,
-  error: false,
+  loadedChip: false,
+  loadingChip: false,
+  errorChip: false,
   chip: [],
 }
 
@@ -20,22 +20,22 @@ export const reducer = (
     case TYPES.GET_CHIP:
       return {
         ...state,
-        loading: true,
-        loaded: false,
+        loadingChip: true,
+        loadedChip: false,
       };
     case TYPES.GET_CHIP_SUCCESS:
       return {
         ...state,
-        loading: false,
-        loaded: true,
+        loadingChip: false,
+        loadedChip: true,
         chip: result.data.data,
       };
     case TYPES.GET_CURRICULUM_ERROR:
       return {
         ...state,
-        loading: false,
-        loaded: false,
-        error: true,
+        loadingChip: false,
+        loadedChip: false,
+        errorChip: true,
       };
 
     default:

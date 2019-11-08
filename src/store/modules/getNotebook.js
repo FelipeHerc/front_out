@@ -6,9 +6,9 @@ const TYPES = {
 };
 
 const initialState = {
-  loaded: false,
-  loading: false,
-  error: false,
+  loadedNotebook: false,
+  loadingNotebook: false,
+  errorNotebook: false,
   notebook: [],
 }
 
@@ -20,22 +20,22 @@ export const reducer = (
     case TYPES.GET_NOTEBOOK:
       return {
         ...state,
-        loading: true,
-        loaded: false,
+        loadingNotebook: true,
+        loadedNotebook: false,
       };
     case TYPES.GET_NOTEBOOK_SUCCESS:
       return {
         ...state,
-        loading: false,
-        loaded: true,
+        loadingNotebook: false,
+        loadedNotebook: true,
         notebook: result.data.data,
       };
     case TYPES.GET_CURRICULUM_ERROR:
       return {
         ...state,
-        loading: false,
-        loaded: false,
-        error: true,
+        loadingNotebook: false,
+        loadedNotebook: false,
+        errorNotebook: true,
       };
 
     default:
