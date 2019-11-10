@@ -1,10 +1,12 @@
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
+import { connect } from 'react-redux';
 import styled from 'styled-components';
-import { getAllNotebook } from '../../store/modules/getNotebook';
 import { getAllStat } from '../../store/modules/getStat';
-import { getAllChip } from '../../store/modules/getChip';
-import { getAllCel } from '../../store/modules/getCel';
-
+import { getAllSector } from '../../store/modules/getSector';
+import { getAllCompany } from '../../store/modules/getCompany';
+import { getAllEquip } from '../../store/modules/getEquip';
+import { getAllOwnership } from '../../store/modules/getOwnership';
+import { Loader } from '../../components'
 
 const StyledListBox = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -17,20 +19,85 @@ const StyledListBox = styled.div`
   border-radius: 5px;
 `;
 
+const H2 = styled.h2`
+  margin: 10px 0px 10px 20px;
+`;
+
+const Row = styled.div`
+    display: flex;    
+    flex-direction: row;
+    justify-content: space-between;
+`;
+
 class Ownerships extends Component{
 
   componentDidMount() {
-    console.log('a');
+    this.props.getAllEquip();
+    this.props.getAllStat();
+    this.props.getAllSector();
+    this.props.getAllCompany();
+    this.props.getAllOwnership();
   }
 
   render()
   {
+    const { equip, loadingEquip } = this.props;
+    const { stat, loadingStat } = this.props;
+    const { sector, loadingSector } = this.props;
+    const { company, loadingCompany } = this.props;
+    const { ownership, loadingOwnership } = this.props;
+
     return(
-      <StyledListBox>
-        <h1>aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h1>
-      </StyledListBox>
+      <Fragment>
+        { 
+          (loadingEquip || loadingStat || loadingSector || loadingCompany || loadingOwnership) ? <Loader /> : (
+
+            <StyledListBox>
+              <Row>
+                <H2>Posses</H2>
+              </Row>
+              
+              { ownership.map((item) => {
+                if(item.attributes.cel_id !== 'undefined')
+                  console.log('celular');
+                if(item.attributes.notebook_id !== 'undefined')
+                  console.log('notebook');
+                if(item.attributes.chip_id !== 'undefined')
+                  console.log('chip');
+              })}
+            </StyledListBox>
+
+          )
+        }
+      </Fragment>
+
     );
   }
 };
 
-export default (Ownerships);
+const mapStateToProps = ({ 
+  chip: { equip, getAllEquip, loadedEquip, loadingEquip }, 
+  stat: { loadedStat, loadingStat, stat },
+  sector: { sector, getAllSector, loadingSector },
+  company: { company, getAllCompany, loadingCompany },
+  ownership: { ownership, getAllOwnership, loadingOwnership }
+  } ) => ({
+  equip,
+  getAllEquip,
+  loadedEquip,
+  loadingEquip,
+  stat,
+  loadedStat, 
+  loadingStat,
+  sector, 
+  getAllSector, 
+  loadingSector,
+  company,
+  getAllCompany, 
+  loadingCompany,
+  ownership, 
+  getAllOwnership, 
+  loadingOwnership 
+});
+
+export default connect(mapStateToProps, { getAllEquip, getAllStat, getAllSector, getAllCompany, getAllOwnership } )(Ownerships);

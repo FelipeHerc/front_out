@@ -1,3 +1,5 @@
+import config from '../../utils/config';
+
 // Action Types
 const TYPES = {
   GET_PERSON: 'services/GET_PERSON',
@@ -74,7 +76,7 @@ export const getAllPerson = () => {
               TYPES.GET_PERSON_SUCCESS,
               TYPES.GET_PERSON_ERROR,
             ],
-      promise: client => client.get('http://localhost:3000/owners', { headers: { 'Access-Control-Allow-Origin': '*' } }),
+      promise: client => client.get(`${config.REACT_APP_BASE_URL}/owners`, { headers: { 'Access-Control-Allow-Origin': '*' } }),
     });
   };
 };

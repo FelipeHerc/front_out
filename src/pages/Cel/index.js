@@ -72,7 +72,7 @@ class Cel extends Component{
     return (
         <Fragment>
           {
-            (loadingCel && loadingStat) ? <Loader/> : (
+            (loadingCel || loadingStat) ? <Loader/> : (
               <StyledListBox>
                 <Row>
                   <H2>Smartphones</H2>

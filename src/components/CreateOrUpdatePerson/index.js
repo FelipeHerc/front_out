@@ -12,6 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import axios from 'axios';
+import config from '../../utils/config';
 
 const Col = styled.div`
   display: flex;
@@ -194,7 +195,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
               return;
             }
             if (!isEditing){
-              axios.post('http://localhost:3000/owners',
+              axios.post(`${config.REACT_APP_BASE_URL}/owners`,
               {  
                 'name': values.personNome,
                 'cpf': values.personCpf,
@@ -212,7 +213,7 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
               });
             }
             else{
-              axios.patch(`http://localhost:3000/owners/${personId}`,
+              axios.patch(`${config.REACT_APP_BASE_URL}/owners/${personId}`,
               {  
                 'name': values.personNome,
                 'cpf': values.personCpf,

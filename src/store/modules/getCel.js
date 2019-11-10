@@ -1,3 +1,5 @@
+import config from '../../utils/config';
+
 // Action Types
 const TYPES = {
   GET_CEL: 'services/GET_CEL',
@@ -52,7 +54,7 @@ export const getAllCel = () => {
               TYPES.GET_CEL_SUCCESS,
               TYPES.GET_CEL_ERROR,
             ],
-      promise: client => client.get('http://localhost:3000/cels', { headers: { 'Access-Control-Allow-Origin': '*' } }),
+      promise: client => client.get(`${config.REACT_APP_BASE_URL}/cels`, { headers: { 'Access-Control-Allow-Origin': '*' } }),
     });
   };
 };

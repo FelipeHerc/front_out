@@ -72,7 +72,7 @@ class Notebook extends Component{
     return (
       <Fragment>
         {
-          (loadingNotebook && loadingStat) ? <Loader/> : (
+          (loadingNotebook || loadingStat) ? <Loader/> : (
             <StyledListBox>
               <Row>
                 <H2>Notebooks</H2>

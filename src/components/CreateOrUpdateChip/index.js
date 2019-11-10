@@ -12,6 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import SaveIcon from '@material-ui/icons/Save';
+import config from '../../utils/config';
 
 const Col = styled.div`
   display: flex;
@@ -163,7 +164,7 @@ const CretaOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumbe
               return;
             }
             if (!isEditing){
-              axios.post('http://localhost:3000/chips',
+              axios.post(`${config.REACT_APP_BASE_URL}/chips`,
               {  
                 "operator": values.chipOperator,
                 "ddd": values.chipDDD,
@@ -181,7 +182,7 @@ const CretaOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumbe
               });
             }
             else{
-              axios.patch(`http://localhost:3000/chips/${chipId}`,
+              axios.patch(`${config.REACT_APP_BASE_URL}/chips/${chipId}`,
               {  
                 "operator": values.chipOperator,
                 "ddd": values.chipDDD,

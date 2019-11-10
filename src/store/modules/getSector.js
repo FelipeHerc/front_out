@@ -1,3 +1,5 @@
+import config from '../../utils/config';
+
 // Action Types
 const TYPES = {
   GET_SECTOR: 'services/GET_SECTOR',
@@ -52,7 +54,7 @@ export const getAllSector = () => {
               TYPES.GET_SECTOR_SUCCESS,
               TYPES.GET_SECTOR_ERROR,
             ],
-      promise: client => client.get('http://localhost:3000/sectors', { headers: { 'Access-Control-Allow-Origin': '*' } }),
+      promise: client => client.get(`${config.REACT_APP_BASE_URL}/sectors`, { headers: { 'Access-Control-Allow-Origin': '*' } }),
     });
   };
 };

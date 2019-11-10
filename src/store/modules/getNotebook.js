@@ -1,3 +1,5 @@
+import config from '../../utils/config';
+
 // Action Types
 const TYPES = {
   GET_NOTEBOOK: 'services/GET_NOTEBOOK',
@@ -52,7 +54,7 @@ export const getAllNotebook = () => {
               TYPES.GET_NOTEBOOK_SUCCESS,
               TYPES.GET_NOTEBOOK_ERROR,
             ],
-      promise: client => client.get('http://localhost:3000/notebooks', { headers: { 'Access-Control-Allow-Origin': '*' } }),
+      promise: client => client.get(`${config.REACT_APP_BASE_URL}/notebooks`, { headers: { 'Access-Control-Allow-Origin': '*' } }),
     });
   };
 };

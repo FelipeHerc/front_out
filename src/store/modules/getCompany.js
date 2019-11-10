@@ -1,3 +1,5 @@
+import config from '../../utils/config';
+
 // Action Types
 const TYPES = {
   GET_COMPANY: 'services/GET_COMPANY',
@@ -52,7 +54,7 @@ export const getAllCompany = () => {
               TYPES.GET_COMPANY_SUCCESS,
               TYPES.GET_COMPANY_ERROR,
             ],
-      promise: client => client.get('http://localhost:3000/companies', { headers: { 'Access-Control-Allow-Origin': '*' } }),
+      promise: client => client.get(`${config.REACT_APP_BASE_URL}/companies`, { headers: { 'Access-Control-Allow-Origin': '*' } }),
     });
   };
 };

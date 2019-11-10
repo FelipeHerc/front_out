@@ -12,6 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import SaveIcon from '@material-ui/icons/Save';
+import config from '../../utils/config';
 
 const Col = styled.div`
   display: flex;
@@ -163,7 +164,7 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
               return;
             }
             if (!isEditing){
-              axios.post('http://localhost:3000/cels',
+              axios.post(`${config.REACT_APP_BASE_URL}/cels`,
               {  
                 "brand": values.celBrand,
                 "model": values.celModel,
@@ -181,7 +182,7 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
               });
             }
             else{
-              axios.patch(`http://localhost:3000/cels/${celId}`,
+              axios.patch(`${config.REACT_APP_BASE_URL}/cels/${celId}`,
               {  
                 "brand": values.celBrand,
                 "model": values.celModel,

@@ -1,3 +1,5 @@
+import config from '../../utils/config';
+
 // Action Types
 const TYPES = {
   GET_STAT: 'services/GET_STAT',
@@ -52,7 +54,7 @@ export const getAllStat = () => {
               TYPES.GET_STAT_SUCCESS,
               TYPES.GET_STAT_ERROR,
             ],
-      promise: client => client.get('http://localhost:3000/stats', { headers: { 'Access-Control-Allow-Origin': '*' } }),
+      promise: client => client.get(`${config.REACT_APP_BASE_URL}/stats`, { headers: { 'Access-Control-Allow-Origin': '*' } }),
     });
   };
 };

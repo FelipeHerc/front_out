@@ -12,6 +12,7 @@ import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
 import SaveIcon from '@material-ui/icons/Save';
+import config from '../../utils/config';
 
 const Col = styled.div`
   display: flex;
@@ -148,7 +149,7 @@ const CreateOrUpdateNotebook = ({ notebookId, isEditing, label, brand, model, se
               return;
             }
             if (!isEditing){
-              axios.post('http://localhost:3000/notebooks',
+              axios.post(`${config.REACT_APP_BASE_URL}/notebooks`,
               {  
                 "brand": values.notebookBrand,
                 "model": values.notebookModel,
@@ -165,7 +166,7 @@ const CreateOrUpdateNotebook = ({ notebookId, isEditing, label, brand, model, se
               });
             }
             else{
-              axios.patch(`http://localhost:3000/notebooks/${notebookId}`,
+              axios.patch(`${config.REACT_APP_BASE_URL}/notebooks/${notebookId}`,
               {  
                 "brand": values.notebookBrand,
                 "model": values.notebookModel,

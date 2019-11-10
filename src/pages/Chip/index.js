@@ -72,7 +72,7 @@ class Chip extends Component{
     return (
         <Fragment>
           {
-            (loadingChip && loadingStat) ? <Loader/> : (
+            (loadingChip || loadingStat) ? <Loader/> : (
               <StyledListBox>
                 <Row>
                   <H2>Chips</H2>
