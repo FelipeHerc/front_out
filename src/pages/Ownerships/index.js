@@ -5,6 +5,7 @@ import { getAllStat } from '../../store/modules/getStat';
 import { getAllSector } from '../../store/modules/getSector';
 import { getAllCompany } from '../../store/modules/getCompany';
 import { getAllEquip } from '../../store/modules/getEquip';
+import { getAllCel } from '../../store/modules/getCel';
 import { getAllOwnership } from '../../store/modules/getOwnership';
 import { Loader } from '../../components'
 
@@ -31,12 +32,23 @@ const Row = styled.div`
 
 class Ownerships extends Component{
 
+  findById = (obj, id) => {
+    console.log(obj);
+    console.log(id);
+        for(var i = 0; i <= Object.keys(obj).length ; i++){ // eslint-disable-next-line 
+          if (obj[i].id == id){
+            return obj[i];
+          }
+        }
+    }
+
   componentDidMount() {
     this.props.getAllEquip();
     this.props.getAllStat();
     this.props.getAllSector();
     this.props.getAllCompany();
     this.props.getAllOwnership();
+    this.props.getAllCel();
   }
 
   render()
@@ -46,27 +58,35 @@ class Ownerships extends Component{
     const { sector, loadingSector } = this.props;
     const { company, loadingCompany } = this.props;
     const { ownership, loadingOwnership } = this.props;
+    const { cel, loadingCel } = this.props;
 
     return(
       <Fragment>
         { 
-          (loadingEquip || loadingStat || loadingSector || loadingCompany || loadingOwnership) ? <Loader /> : (
+          (loadingEquip || loadingStat || loadingSector || loadingCompany || loadingOwnership || loadingCel) ? <Loader /> : (
 
             <StyledListBox>
               <Row>
                 <H2>Posses</H2>
               </Row>
               
-              { ownership.map((item) => {
-                if(item.attributes.cel_id !== 'undefined')
-                  console.log('celular');
-                if(item.attributes.notebook_id !== 'undefined')
-                  console.log('notebook');
-                if(item.attributes.chip_id !== 'undefined')
-                  console.log('chip');
-              })}
-            </StyledListBox>
+              { 
+                ownership.map((item) => (
 
+                  (item.attributes.cel_id !== 'undefined' &&
+                    <h1>a</h1> && console.log(this.findById(cel, 5))
+                  )
+                  //   if(item.attributes.cel_id !== 'undefined')
+                  //   console.log('notebook');
+                  
+                  // if(item.attributes.notebook_id !== 'undefined')
+                  //   console.log('notebook');
+                  // if(item.attributes.chip_id !== 'undefined')
+                  //   console.log('chip');
+                ))
+                
+              }
+            </StyledListBox>
           )
         }
       </Fragment>
@@ -80,7 +100,8 @@ const mapStateToProps = ({
   stat: { loadedStat, loadingStat, stat },
   sector: { sector, getAllSector, loadingSector },
   company: { company, getAllCompany, loadingCompany },
-  ownership: { ownership, getAllOwnership, loadingOwnership }
+  ownership: { ownership, getAllOwnership, loadingOwnership },
+  cel: { cel, getAllCel, loadingCel }
   } ) => ({
   equip,
   getAllEquip,
@@ -97,7 +118,13 @@ const mapStateToProps = ({
   loadingCompany,
   ownership, 
   getAllOwnership, 
-  loadingOwnership 
+  loadingOwnership,
+  cel, 
+  getAllCel, 
+  loadingCel
 });
 
-export default connect(mapStateToProps, { getAllEquip, getAllStat, getAllSector, getAllCompany, getAllOwnership } )(Ownerships);
+export default connect(mapStateToProps, { getAllEquip, getAllStat, getAllSector, getAllCompany, getAllOwnership, getAllCel } )(Ownerships);
+
+
+

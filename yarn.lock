@@ -8583,6 +8583,13 @@ react-loading@^2.0.3:
   resolved "https://registry.yarnpkg.com/react-loading/-/react-loading-2.0.3.tgz#e8138fb0c3e4674e481b320802ac7048ae14ffb9"
   integrity sha512-Vdqy79zq+bpeWJqC+xjltUjuGApyoItPgL0vgVfcJHhqwU7bAMKzysfGW/ADu6i0z0JiOCRJjo+IkFNkRNbA3A==
 
+react-lodash@^0.1.2:
+  version "0.1.2"
+  resolved "https://registry.yarnpkg.com/react-lodash/-/react-lodash-0.1.2.tgz#be2b00574093eae0f3e942dff1f48d48e8211d59"
+  integrity sha512-0yE7/CjDgF72tRKZka6sZf0XUx1uG0lcpBZqhKp7oRo84K1ZzPMNiEUjAEcsXw6rsYHLqwttClO4BhPJ7e+R5w==
+  dependencies:
+    lodash "^4.17.11"
+
 react-overlays@^1.2.0:
   version "1.2.0"
   resolved "https://registry.yarnpkg.com/react-overlays/-/react-overlays-1.2.0.tgz#205368eeb0a5fb0b7f9b717fa7a12d518500abdb"
