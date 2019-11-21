@@ -166,7 +166,6 @@ const CreateOrUpdateNotebook = ({ notebookId, isEditing, label, brand, model, se
               });
             }
             else{
-              console.log(notebookId);
               axios.patch(`${config.REACT_APP_BASE_URL}/notebooks/${notebookId}`,
               {  
                 "brand": values.notebookBrand,

@@ -10,6 +10,7 @@ import Button from '@material-ui/core/Button';
 import { CreateOrUpdateCel } from '../../components'
 import { MdPhoneAndroid } from "react-icons/md";
 import { FaUserTie } from "react-icons/fa";
+import { FaUserAlt } from "react-icons/fa";
 
 const ButtonBox = styled.div`
   margin-left: 10px;
@@ -57,21 +58,7 @@ const ModelIcon = styled(MdPhonelinkSetup)`
   height: 12px;
 `;
 
-const StatusIcon = styled(FaTag)`
-  margin-left: 10px;
-  margin-right: 10px;
-  width: 12px;
-  height: 12px;
-`;
-
-const Imei1Icon = styled(FaLock)`
-  margin-right: 10px;
-  width: 12px;
-  height: 12px;
-`;
-
-const Imei2Icon = styled(FaLock)`
-  margin-left: 10px;  
+const TinyPersonIcon = styled(FaUserAlt)`
   margin-right: 10px;
   width: 12px;
   height: 12px;
@@ -95,25 +82,33 @@ const Text = styled.div`
 
 const CelOwnershipCard = ({ key, cel, owner, companyList, sectorList }) => {
   const [open, setOpen] = useState(0);
-  console.log(cel);
-  console.log(owner);
   return (
     <StyledBox>
       <Row>
-        <CelIcon />
-          <Col>
-            <Row>
-              <BrandIcon />
-              <Text><strong>Marca:</strong> {cel.attributes.brand}</Text>
-            </Row>
-            <Row>
-              <ModelIcon />
-              <Text><strong>Modelo:</strong> {cel.attributes.model}</Text>
-            </Row>
-          </Col>
+      <CelIcon />
+        <Col>
+          <Row>
+            <BrandIcon />
+            <Text><strong>Marca:</strong> {cel.attributes.brand}</Text>
+          </Row>
+          <Row>
+            <ModelIcon />
+            <Text><strong>Modelo:</strong> {cel.attributes.model}</Text>
+          </Row>
+        </Col>
+      </Row>
       <Row>
         <PersonIcon />
-      </Row>
+        <Col>
+          <Row>
+            <TinyPersonIcon />
+            <Text><strong>Nome:</strong> {owner.name}</Text>
+          </Row>
+          <Row>
+            <TinyPersonIcon />
+            <Text><strong>Nome:</strong> </Text>
+          </Row>
+        </Col>
       </Row>
       <Row>
       <ButtonBox>
