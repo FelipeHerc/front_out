@@ -15,7 +15,7 @@ const ButtonBox = styled.div`
 const StyledListBox = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  margin: 20px 10vw 20px 10vw;
+  margin: 20px 5vw 20px 10vw;
   padding: 10px;
   align-items: center;
   align-content: center;

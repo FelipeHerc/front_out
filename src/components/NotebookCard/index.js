@@ -107,8 +107,9 @@ const NotebookCard = ({ id, brand, model, serialNumber, statId, stat, statList }
           </Button>
         </ButtonBox>
         <Modal open={Boolean(open)} onClose={() => setOpen(false)} center>
-          <CreateOrUpdateNotebook 
-            isEditing={false} 
+          <CreateOrUpdateNotebook
+            notebookId={id} 
+            isEditing={true} 
             label="Criar Smartphone" 
             statList={statList}
             brand={brand}

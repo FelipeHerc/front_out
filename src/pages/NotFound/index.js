@@ -6,7 +6,7 @@ const ErrorBox = styled.div`
   display: flex;
   flex-direction: row;
   justify-content: center;
-  margin: 20px 10vw 20px 10vw;
+  margin: 20px 5vw 20px 10vw;
 `
 const ErrorMessage = styled.div`
   display: flex;

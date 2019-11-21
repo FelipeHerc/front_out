@@ -118,7 +118,8 @@ const CelCard = ({ id, operator, ddd, phoneNumber, value, statId, stat, statList
         </ButtonBox>
         <Modal open={Boolean(open)} onClose={() => setOpen(false)} center>
           <CreateOrUpdateChip 
-            isEditing={false} 
+            chipId={id}
+            isEditing={true} 
             label="Criar Smartphone" 
             statList={statList}
             operator={operator}

@@ -1,5 +1,5 @@
 import React, { useState }  from 'react';
-import { string } from 'prop-types';
+import { object } from 'prop-types';
 import styled from 'styled-components'; 
 import { FaTag } from "react-icons/fa";
 import { FaBox } from "react-icons/fa";
@@ -8,9 +8,19 @@ import { MdPhonelinkSetup } from "react-icons/md";
 import Modal from 'react-responsive-modal';
 import Button from '@material-ui/core/Button';
 import { CreateOrUpdateCel } from '../../components'
+import { MdPhoneAndroid } from "react-icons/md";
+import { FaUserTie } from "react-icons/fa";
 
 const ButtonBox = styled.div`
   margin-left: 10px;
+`;
+
+const PersonIcon = styled(FaUserTie)`
+  width: 48px;
+  height: 48px;
+  fill: #ccc;
+  position: relative;
+  left: -10px;
 `;
 
 const StyledBox = styled.div`
@@ -18,13 +28,21 @@ const StyledBox = styled.div`
   flex-direction: row;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 75vw;
+  width: 79vw;
   margin: 10px;
   padding: 10px 15px;
   margin: auto;
   margin-top: 5px;
   margin-bottom: 5px;
   justify-content: space-between;
+`;
+
+const CelIcon = styled(MdPhoneAndroid)`
+  width: 48px;
+  height: 48px;
+  fill: #ccc;
+  position: relative;
+  left: -10px;
 `;
 
 const BrandIcon = styled(FaBox)`
@@ -34,7 +52,6 @@ const BrandIcon = styled(FaBox)`
 `;
 
 const ModelIcon = styled(MdPhonelinkSetup)`
-  margin-left: 10px;
   margin-right: 10px;
   width: 12px;
   height: 12px;
@@ -76,27 +93,27 @@ const Text = styled.div`
   margin: 0 10px 0 0;
 `;
 
-const CelOwnershipCard = ({ id, brand, model, imei1, imei2, statId, stat, statList }) => {
+const CelOwnershipCard = ({ key, cel, owner, companyList, sectorList }) => {
   const [open, setOpen] = useState(0);
+  console.log(cel);
+  console.log(owner);
   return (
     <StyledBox>
       <Row>
-        <Col>
-          <Row>
-            <BrandIcon/>
-            <Text><strong>Marca:</strong> {brand}</Text> 
-            <ModelIcon/>
-            <Text><strong>Modelo:</strong> {model}</Text>
-            <StatusIcon/>
-            <Text><strong>Status:</strong> {stat}</Text>
-          </Row>
-          <Row>
-            <Imei1Icon/>
-            <Text><strong>Imei 1:</strong> {imei1}</Text>
-            <Imei2Icon/>
-            <Text><strong>Imei 2:</strong> {imei2}</Text>
-          </Row>
-        </Col>
+        <CelIcon />
+          <Col>
+            <Row>
+              <BrandIcon />
+              <Text><strong>Marca:</strong> {cel.attributes.brand}</Text>
+            </Row>
+            <Row>
+              <ModelIcon />
+              <Text><strong>Modelo:</strong> {cel.attributes.model}</Text>
+            </Row>
+          </Col>
+      <Row>
+        <PersonIcon />
+      </Row>
       </Row>
       <Row>
       <ButtonBox>
@@ -113,7 +130,7 @@ const CelOwnershipCard = ({ id, brand, model, imei1, imei2, statId, stat, statLi
             Deletar
           </Button>
         </ButtonBox>
-        <Modal open={Boolean(open)} onClose={() => setOpen(false)} center>
+        {/* <Modal open={Boolean(open)} onClose={() => setOpen(false)} center>
           <CreateOrUpdateCel 
             isEditing={false} 
             label="Criar Smartphone" 
@@ -124,8 +141,7 @@ const CelOwnershipCard = ({ id, brand, model, imei1, imei2, statId, stat, statLi
             imei2={imei2}
             statId={statId}
           />
-
-        </Modal>
+        </Modal> */}
       </Row>
     </StyledBox>
   )
@@ -133,11 +149,10 @@ const CelOwnershipCard = ({ id, brand, model, imei1, imei2, statId, stat, statLi
 }
 
 CelOwnershipCard.propTypes = {
-  brand: string.isRequired,
-  model: string.isRequired,
-  imei1: string.isRequired,
-  imei2: string.isRequired,
-  stat: string.isRequired
+  owner: object,
+  cel: object,
+  companyList: object,
+  sectorList: object,
 };
 
 export default CelOwnershipCard;

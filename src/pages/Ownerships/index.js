@@ -7,12 +7,12 @@ import { getAllCompany } from '../../store/modules/getCompany';
 import { getAllEquip } from '../../store/modules/getEquip';
 import { getAllCel } from '../../store/modules/getCel';
 import { getAllOwnership } from '../../store/modules/getOwnership';
-import { Loader } from '../../components'
+import { Loader, CelOwnershipCard } from '../../components'
 
 const StyledListBox = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  margin: 20px 10vw 20px 10vw;
+  margin: 20px 5vw 20px 10vw;
   padding: 10px;
   align-items: center;
   align-content: center;
@@ -33,8 +33,6 @@ const Row = styled.div`
 class Ownerships extends Component{
 
   findById = (obj, id) => {
-    console.log(obj);
-    console.log(id);
         for(var i = 0; i <= Object.keys(obj).length ; i++){ // eslint-disable-next-line 
           if (obj[i].id == id){
             return obj[i];
@@ -59,6 +57,7 @@ class Ownerships extends Component{
     const { company, loadingCompany } = this.props;
     const { ownership, loadingOwnership } = this.props;
     const { cel, loadingCel } = this.props;
+    console.log(ownership);
 
     return(
       <Fragment>
@@ -72,9 +71,9 @@ class Ownerships extends Component{
               
               { 
                 ownership.map((item) => (
-
                   (item.attributes.cel_id !== 'undefined' &&
-                    <h1>a</h1> && console.log(this.findById(cel, 5))
+                  item.attributes.equip.cel_id !== null && 
+                      <CelOwnershipCard key={item.id} cel={this.findById(cel, item.attributes.equip.cel_id)} owner={item.attributes.owner} />
                   )
                   //   if(item.attributes.cel_id !== 'undefined')
                   //   console.log('notebook');

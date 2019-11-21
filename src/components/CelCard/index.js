@@ -114,8 +114,9 @@ const CelCard = ({ id, brand, model, imei1, imei2, statId, stat, statList }) => 
           </Button>
         </ButtonBox>
         <Modal open={Boolean(open)} onClose={() => setOpen(false)} center>
-          <CreateOrUpdateCel 
-            isEditing={false} 
+          <CreateOrUpdateCel
+            celId={id} 
+            isEditing={true} 
             label="Criar Smartphone" 
             statList={statList}
             brand={brand}

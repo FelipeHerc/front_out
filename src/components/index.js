@@ -13,3 +13,4 @@ export { default as CreateOrUpdatePerson } from './CreateOrUpdatePerson';
 export { default as CreateOrUpdateCel } from './CreateOrUpdateCel';
 export { default as CreateOrUpdateChip } from './CreateOrUpdateChip';
 export { default as CreateOrUpdateNotebook } from './CreateOrUpdateNotebook';
+export { default as CelOwnershipCard } from './CelOwnershipCard';
