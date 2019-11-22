@@ -15,3 +15,4 @@ export { default as CreateOrUpdateChip } from './CreateOrUpdateChip';
 export { default as CreateOrUpdateNotebook } from './CreateOrUpdateNotebook';
 export { default as CelOwnershipCard } from './CelOwnershipCard';
 export { default as ChipOwnershipCard } from './ChipOwnershipCard';
+export { default as NotebookOwnershipCard } from './NotebookOwnershipCard';

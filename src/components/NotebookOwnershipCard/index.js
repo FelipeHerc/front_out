@@ -8,7 +8,7 @@ import { MdPhonelinkSetup } from "react-icons/md";
 import Modal from 'react-responsive-modal';
 import Button from '@material-ui/core/Button';
 import { CreateOrUpdateCel } from '../../components'
-import { FaSimCard } from "react-icons/fa";
+import { MdLaptop } from "react-icons/md";
 import { FaUserTie } from "react-icons/fa";
 import { FaUserAlt } from "react-icons/fa";
 import { FaKey } from "react-icons/fa";
@@ -45,7 +45,7 @@ const StyledBox = styled.div`
   justify-content: space-between;
 `;
 
-const ChipIcon = styled(FaSimCard)`
+const NotebookIcon = styled(MdLaptop)`
   width: 48px;
   height: 48px;
   fill: #ccc;
@@ -87,22 +87,20 @@ const Text = styled.div`
   margin: 0 10px 0 0;
 `;
 
-const ChipOwnershipCard = ({ key, chip, owner, companyList, sectorList }) => {
+const NotebookOwnershipCard = ({ key, notebook, owner, companyList, sectorList }) => {
   const [open, setOpen] = useState(0);
   return (
     <StyledBox>
       <Row>
-      <ChipIcon />
+      <NotebookIcon />
         <Col>
           <Row>
             <BrandIcon />
-            <Text><strong>Marca:</strong> {chip.attributes.operator}</Text>
+            <Text><strong>Marca:</strong> {notebook.attributes.brand}</Text>
           </Row>
           <Row>
             <ModelIcon />
-            <Text><strong>Modelo:</strong> {chip.attributes.ddd}</Text>
-            <ModelIcon />
-            <Text><strong>Modelo:</strong> {chip.attributes['phone-number']}</Text>
+            <Text><strong>Modelo:</strong> {notebook.attributes.model}</Text>
           </Row>
         </Col>
       </Row>
@@ -152,11 +150,11 @@ const ChipOwnershipCard = ({ key, chip, owner, companyList, sectorList }) => {
 
 }
 
-ChipOwnershipCard.propTypes = {
+NotebookOwnershipCard.propTypes = {
   owner: object,
-  chip: object,
+  notebook: object,
   companyList: object,
   sectorList: object,
 };
 
-export default ChipOwnershipCard;
+export default NotebookOwnershipCard;
