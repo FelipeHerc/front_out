@@ -57,7 +57,6 @@ class Ownerships extends Component{
     const { company, loadingCompany } = this.props;
     const { ownership, loadingOwnership } = this.props;
     const { cel, loadingCel } = this.props;
-    console.log(ownership);
 
     return(
       <Fragment>

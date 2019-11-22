@@ -87,7 +87,7 @@ const Text = styled.div`
   margin: 0 10px 0 0;
 `;
 
-const CelOwnershipCard = ({ key, cel, owner, companyList, sectorList }) => {
+const ChipOwnershipCard = ({ key, chip, owner, companyList, sectorList }) => {
   const [open, setOpen] = useState(0);
   return (
     <StyledBox>
@@ -96,11 +96,11 @@ const CelOwnershipCard = ({ key, cel, owner, companyList, sectorList }) => {
         <Col>
           <Row>
             <BrandIcon />
-            <Text><strong>Marca:</strong> {cel.attributes.brand}</Text>
+            <Text><strong>Marca:</strong> {chip.attributes.brand}</Text>
           </Row>
           <Row>
             <ModelIcon />
-            <Text><strong>Modelo:</strong> {cel.attributes.model}</Text>
+            <Text><strong>Modelo:</strong> {chip.attributes.model}</Text>
           </Row>
         </Col>
       </Row>
@@ -150,11 +150,11 @@ const CelOwnershipCard = ({ key, cel, owner, companyList, sectorList }) => {
 
 }
 
-CelOwnershipCard.propTypes = {
+ChipOwnershipCard.propTypes = {
   owner: object,
-  cel: object,
+  chip: object,
   companyList: object,
   sectorList: object,
 };
 
-export default CelOwnershipCard;
+export default ChipOwnershipCard;
