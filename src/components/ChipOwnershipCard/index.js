@@ -96,13 +96,13 @@ const ChipOwnershipCard = ({ key, chip, owner, companyList, sectorList }) => {
         <Col>
           <Row>
             <BrandIcon />
-            <Text><strong>Marca:</strong> {chip.attributes.operator}</Text>
+            <Text><strong>Operadora:</strong> {chip.attributes.operator}</Text>
           </Row>
           <Row>
             <ModelIcon />
-            <Text><strong>Modelo:</strong> {chip.attributes.ddd}</Text>
+            <Text><strong>DDD:</strong> {chip.attributes.ddd}</Text>
             <ModelIcon />
-            <Text><strong>Modelo:</strong> {chip.attributes['phone-number']}</Text>
+            <Text><strong>Número:</strong> {chip.attributes['phone-number']}</Text>
           </Row>
         </Col>
       </Row>
