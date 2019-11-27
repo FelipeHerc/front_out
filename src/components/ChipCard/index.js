@@ -19,7 +19,7 @@ const StyledBox = styled.div`
   flex-direction: row;
   box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
   transition: 0.3s;
-  width: 75vw;
+  width: 79vw;
   margin: 10px;
   padding: 10px 15px;
   margin: auto;
