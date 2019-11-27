@@ -10,6 +10,9 @@ import { getAllCel } from '../../store/modules/getCel';
 import { getAllNotebook } from '../../store/modules/getNotebook';
 import { getAllOwnership } from '../../store/modules/getOwnership';
 import { Loader, CelOwnershipCard, ChipOwnershipCard, NotebookOwnershipCard } from '../../components'
+import FormGroup from '@material-ui/core/FormGroup';
+import FormControlLabel from '@material-ui/core/FormControlLabel';
+import Switch from '@material-ui/core/Switch';
 
 const StyledListBox = styled.div`
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
@@ -32,7 +35,17 @@ const Row = styled.div`
     justify-content: space-between;
 `;
 
+const Col = styled.div`
+    display: flex;    
+    flex-direction: column;
+    justify-content: space-between;
+`;
+
 class Ownerships extends Component{
+  constructor(props) {
+    super(props);
+    this.state = { switchCel: true, switchNote: true, switchChip: true };
+  }
 
   findById = (obj, id) => {
         for(var i = 0; i <= Object.keys(obj).length ; i++){ // eslint-disable-next-line 
@@ -55,6 +68,7 @@ class Ownerships extends Component{
 
   render()
   {
+    console.log(this.state.switchCel);
     const { equip, loadingEquip } = this.props;
     const { stat, loadingStat } = this.props;
     const { sector, loadingSector } = this.props;
@@ -71,7 +85,32 @@ class Ownerships extends Component{
 
             <StyledListBox>
               <Row>
-                <H2>Posses</H2>
+                <Col>
+                  <H2>Posses</H2>
+                </Col>
+                <Col>
+                  <Row>
+                    <FormControlLabel
+                      control={
+                        <Switch checked={this.state.switchCel} onChange={() => this.setState({ switchCel: Boolean(1 - this.state.switchCel) })} value="switchCel" color="primary" />
+                      }
+                      label="Secondary"
+                    />                
+                    <FormControlLabel
+                    control={
+                      <Switch checked={this.state.switchCel} onChange={() => this.setState({ switchCel: Boolean(1 - this.state.switchCel) })} value="switchCel" color="primary" />
+                    }
+                    label="Secondary"
+                  />
+                    <FormControlLabel
+                      control={
+                        <Switch checked={this.state.switchCel} onChange={() => this.setState({ switchCel: Boolean(1 - this.state.switchCel) })} value="switchCel" color="primary" />
+                      }
+                      label="Secondary"
+                    />
+                  </Row>                
+                </Col>
+
               </Row>
               
               { 
