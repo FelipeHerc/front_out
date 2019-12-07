@@ -11,6 +11,9 @@ import { withRouter } from 'react-router-dom';
 import Radio from '@material-ui/core/Radio';
 import RadioGroup from '@material-ui/core/RadioGroup';
 import FormControlLabel from '@material-ui/core/FormControlLabel';
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
+import InputLabel from '@material-ui/core/InputLabel';
 import axios from 'axios';
 import config from '../../utils/config';
 
@@ -83,6 +86,9 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
   const [saved, setSaved] = React.useState(false);
   const [emptyField, setEmptyField] = React.useState(false);
   const [saveError, setSaveError] = React.useState(false);
+  const [age, setAge] = React.useState('');
+  const inputLabel = React.useRef(null);
+
   const [values, setValues] = React.useState({
     personNome: nome         || '',
     personCpf: cpf           || '',
@@ -90,6 +96,12 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
     personSetor: setor       || '',
     personEmpresa: empresa   || '',
   });
+
+  const handleChangeSelect = (name, event) => {
+    console.log(event);
+    console.log(name);
+    setAge(event.target.value);
+  };
 
   const handleChange = normalize => event => {
     setValues({ ...values, [normalize]: event.target.value });
@@ -132,6 +144,20 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
               margin="normal"
             />
           </Row>
+          <FormControl className={classes.formControl}>
+        <InputLabel id="demo-simple-select-label">Age</InputLabel>
+        <Select
+          labelId="demo-simple-select-label"
+          id="demo-simple-select"
+          value={age}
+          name={age}
+          onChange={e => handleChangeSelect('age', e)}
+        >
+          <MenuItem value={10}>Ten</MenuItem>
+          <MenuItem value={20}>Twenty</MenuItem>
+          <MenuItem value={30}>Thirty</MenuItem>
+        </Select>
+      </FormControl>
           <Row>
             <RadioBox>
               <Company>
