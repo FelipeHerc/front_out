@@ -106,7 +106,7 @@ const NotebookCard = ({ id, brand, model, serialNumber, statId, stat, statList }
             Deletar
           </Button>
         </ButtonBox>
-        <Modal open={Boolean(open)} onClose={() => setOpen(false)} center>
+        <Modal open={Boolean(open)} onClose={() => setOpen(false)} center focusTrapped={false}>
           <CreateOrUpdateNotebook
             notebookId={id} 
             isEditing={true} 

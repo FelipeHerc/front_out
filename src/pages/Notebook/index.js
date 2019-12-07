@@ -81,7 +81,7 @@ class Notebook extends Component{
                     Criar novo Notebook
                   </Button>
                 </ButtonBox>
-                <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllNotebook()} center>
+                <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllNotebook()} center focusTrapped={false}>
                   <CreateOrUpdateNotebook isEditing={false} label="Criar Notebook" statList={stat} />
                 </Modal>
               </Row>

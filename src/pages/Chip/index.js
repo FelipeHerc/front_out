@@ -81,7 +81,7 @@ class Chip extends Component{
                       Criar novo Chip
                     </Button>
                   </ButtonBox>
-                  <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllChip()} center>
+                  <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllChip()} center focusTrapped={false}>
                     <CreateOrUpdateChip isEditing={false} label="Criar Chip" statList={stat} />
                   </Modal>
                 </Row>

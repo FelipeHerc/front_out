@@ -87,7 +87,7 @@ class Person extends Component{
                       Criar novo funcionário
                     </Button>
                   </ButtonBox>
-                  <Modal open={Boolean(open)} onClose={this.onCloseModal} onExited={() => this.props.getAllPerson()} center>
+                  <Modal open={Boolean(open)} onClose={this.onCloseModal} onExited={() => this.props.getAllPerson()} center focusTrapped={false}>
                     <CreateOrUpdatePerson isEditing={false} label="Criar funcionário" companyList={company} sectorList={sector}/>
                   </Modal>
                 </Row>

@@ -71,7 +71,7 @@ const useStyles = makeStyles(theme => ({
   textFieldBig: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 400,
+    width: 415,
   },
   dense: {
     marginTop: 19,
@@ -86,8 +86,6 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
   const [saved, setSaved] = React.useState(false);
   const [emptyField, setEmptyField] = React.useState(false);
   const [saveError, setSaveError] = React.useState(false);
-  const [age, setAge] = React.useState('');
-  const inputLabel = React.useRef(null);
 
   const [values, setValues] = React.useState({
     personNome: nome         || '',
@@ -97,16 +95,11 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
     personEmpresa: empresa   || '',
   });
 
-  const handleChangeSelect = (name, event) => {
-    console.log(event);
-    console.log(name);
-    setAge(event.target.value);
-  };
-
   const handleChange = normalize => event => {
     setValues({ ...values, [normalize]: event.target.value });
   };
 
+console.log(values);
   return (
     <div>
       <h4>{label}</h4>
@@ -145,58 +138,45 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
             />
           </Row>
           <FormControl className={classes.formControl}>
-        <InputLabel id="demo-simple-select-label">Age</InputLabel>
-        <Select
-          labelId="demo-simple-select-label"
-          id="demo-simple-select"
-          value={age}
-          name={age}
-          onChange={e => handleChangeSelect('age', e)}
-        >
-          <MenuItem value={10}>Ten</MenuItem>
-          <MenuItem value={20}>Twenty</MenuItem>
-          <MenuItem value={30}>Thirty</MenuItem>
-        </Select>
-      </FormControl>
-          <Row>
-            <RadioBox>
-              <Company>
-                <h6>Empresa:</h6>
-                <RadioGroup aria-label="position" name="position" value={values.personEmpresa} onChange={handleChange('personEmpresa')}>
-                  {
-                    companyList.map((item) => (
-                      <FormControlLabel
-                        key={item.id}
-                        value={item.id}
-                        control={<Radio color="primary" />}
-                        label={item.attributes.name}
-                        labelPlacement="end" // eslint-disable-next-line 
-                        checked={values.personEmpresa == item.id}
-                    />
-                    ))
-                  }
-                </RadioGroup>
-              </Company>
-              <Sector>
-                <h6>Setor:</h6>
-                <RadioGroup aria-label="position" name="position" value={values.personSetor} onChange={handleChange('personSetor')}>
-                  {
-                    sectorList.map((item) => (
-                      <FormControlLabel
-                        key={item.id}
-                        value={item.id}
-                        control={<Radio color="primary" />}
-                        label={item.attributes.name}
-                        labelPlacement="end" // eslint-disable-next-line 
-                        checked={values.personSetor == item.id}
-                    />
-                    ))
-                  }
-                </RadioGroup>
-              </Sector>
-            </RadioBox>
-          </Row>
+            <InputLabel id="company-select">Empresa</InputLabel>
+            <Select
+              labelId="company-select"
+              id="company-select"
+              value={values.personEmpresa}
+              onChange={handleChange('personEmpresa')}
+            >
+              {
+                companyList.map((item) => (
+                  <MenuItem 
+                    key={item.id} 
+                    value={item.id}>
+                      {item.attributes.name}
+                  </MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="sector-select">Setor</InputLabel>
+            <Select
+              labelId="sector-select"
+              id="sector-select"
+              value={values.personSetor}
+              onChange={handleChange('personSetor')}
+            >
+              {
+                sectorList.map((item) => (
+                  <MenuItem 
+                    key={item.id} 
+                    value={item.id}>
+                      {item.attributes.name}
+                  </MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
         </Col>
+
         <Button
           id="save"
           variant="contained"

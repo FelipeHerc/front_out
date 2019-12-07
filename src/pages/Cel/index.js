@@ -81,7 +81,7 @@ class Cel extends Component{
                       Criar novo Smartphone
                     </Button>
                   </ButtonBox>
-                  <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllCel()} center>
+                  <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllCel()} center focusTrapped={false}>
                     <CreateOrUpdateCel isEditing={false} label="Criar Smartphone" statList={stat} />
                   </Modal>
                 </Row>
