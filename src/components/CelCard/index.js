@@ -108,11 +108,11 @@ const CelCard = ({ id, brand, model, imei1, imei2, statId, stat, statList }) => 
             Editar
           </Button>
         </ButtonBox>
-        <ButtonBox>
+        {/* <ButtonBox>
           <Button variant="contained" color="secondary" size="small">
             Deletar
           </Button>
-        </ButtonBox>
+        </ButtonBox> */}
         <Modal open={Boolean(open)} onClose={() => setOpen(false)} center focusTrapped={false}>
           <CreateOrUpdateCel
             celId={id} 

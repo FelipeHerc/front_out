@@ -127,11 +127,11 @@ const NotebookOwnershipCard = ({ key, notebook, owner, companyList, sectorList }
             Editar
           </Button>
         </ButtonBox>
-        <ButtonBox>
+        {/* <ButtonBox>
           <Button variant="contained" color="secondary" size="small">
             Deletar
           </Button>
-        </ButtonBox>
+        </ButtonBox> */}
         {/* <Modal open={Boolean(open)} onClose={() => setOpen(false)} center>
           <CreateOrUpdateCel 
             isEditing={false} 

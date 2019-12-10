@@ -111,11 +111,11 @@ const CelCard = ({ id, operator, ddd, phoneNumber, value, statId, stat, statList
             Editar
           </Button>
         </ButtonBox>
-        <ButtonBox>
+        {/* <ButtonBox>
           <Button variant="contained" color="secondary" size="small">
             Deletar
           </Button>
-        </ButtonBox>
+        </ButtonBox> */}
         <Modal open={Boolean(open)} onClose={() => setOpen(false)} center focusTrapped={false}>
           <CreateOrUpdateChip 
             chipId={id}
