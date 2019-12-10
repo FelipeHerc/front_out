@@ -81,7 +81,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, empresa, setor, companyList, sectorList }) => {
+const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, empresa, setor, city, companyList, sectorList, cityList }) => {
   const classes = useStyles();
   const [saved, setSaved] = React.useState(false);
   const [emptyField, setEmptyField] = React.useState(false);
@@ -93,13 +93,13 @@ const CreateOrUpdatePerson = ({ personId, isEditing, label, nome, cpf, email, em
     personEmail: email       || '',
     personSetor: setor       || '',
     personEmpresa: empresa   || '',
+    personCity: city         || '',
   });
 
   const handleChange = normalize => event => {
     setValues({ ...values, [normalize]: event.target.value });
   };
-
-console.log(values);
+  console.log(values);
   return (
     <div>
       <h4>{label}</h4>
@@ -137,6 +137,25 @@ console.log(values);
               margin="normal"
             />
           </Row>
+          <FormControl className={classes.formControl}>
+            <InputLabel id="city-select">Cidade</InputLabel>
+            <Select
+              labelId="city-select"
+              id="city-select"
+              value={values.personCity}
+              onChange={handleChange('personCity')}
+            >
+              {
+                cityList.map((item) => (
+                  <MenuItem 
+                    key={item.id} 
+                    value={item.id}>
+                      {item.attributes.name}
+                  </MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
           <FormControl className={classes.formControl}>
             <InputLabel id="company-select">Empresa</InputLabel>
             <Select
@@ -190,11 +209,13 @@ console.log(values);
                 values.personEmail   === undefined ||
                 values.personSetor   === undefined ||
                 values.personEmpresa === undefined ||
+                values.personCity    === undefined ||
                 values.personNome    === '' ||
                 values.personCpf     === '' ||
                 values.personEmail   === '' ||
                 values.personSetor   === '' ||
-                values.personEmpresa === ''
+                values.personEmpresa === '' ||
+                values.personCity    === ''
                 ){
               setSaved(false);
               setEmptyField(true);
@@ -207,7 +228,8 @@ console.log(values);
                 'cpf': values.personCpf,
                 'email': values.personEmail,
                 'sector_id': values.personSetor,
-                'company_id': values.personEmpresa
+                'company_id': values.personEmpresa,
+                'city_id': values.personCity
               }).then(function(response){
                 setSaved(true);
                 setSaveError(false);
@@ -225,7 +247,8 @@ console.log(values);
                 'cpf': values.personCpf,
                 'email': values.personEmail,
                 'sector_id': values.personSetor,
-                'company_id': values.personEmpresa
+                'company_id': values.personEmpresa,
+                'city_id': values.personCity
               }).then(function(response){
                 setSaved(true);
                 setSaveError(false);

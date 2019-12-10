@@ -6,6 +6,7 @@ import { FaKey } from "react-icons/fa";
 import { FaIndustry } from "react-icons/fa";
 import { FaPaste } from "react-icons/fa";
 import { FaMailBulk } from "react-icons/fa";
+import { FaWarehouse } from "react-icons/fa";
 import Button from '@material-ui/core/Button';
 import Modal from 'react-responsive-modal';
 import { CreateOrUpdatePerson } from '../../components'
@@ -55,6 +56,13 @@ const CompanyIcon = styled(FaIndustry)`
   height: 12px;
 `;
 
+const HouseIcon = styled(FaWarehouse)`
+  margin-right: 10px;
+  margin-left: 10px;
+  width: 12px;
+  height: 12px;
+`;
+
 const SectorIcon = styled(FaPaste)`
   margin-left: 10px;  
   margin-right: 10px;
@@ -78,7 +86,7 @@ const Text = styled.div`
   margin: 0 10px 0 0;
 `;
 
-const PersonCard = ({id, name, cpf, email, company_name, sector_name, companyList, sectorList, company, sector}) => {
+const PersonCard = ({id, name, cpf, email, company_name, sector_name, companyList, sectorList, cityList, company, sector, city, city_name }) => {
   const [open, setOpen] = useState(0);
   return (
     <StyledBox>
@@ -97,6 +105,8 @@ const PersonCard = ({id, name, cpf, email, company_name, sector_name, companyLis
             <Text><strong>Empresa:</strong> {company_name}</Text>
             <SectorIcon/>
             <Text><strong>Setor:</strong> {sector_name}</Text>
+            <HouseIcon/>
+            <Text><strong>Cidade:</strong> {city_name}</Text>            
           </Row>
         </Col>
       </Row>

@@ -3,6 +3,7 @@ import { connect } from 'react-redux';
 import { getAllPerson } from '../../store/modules/getPerson';
 import { getAllCompany } from '../../store/modules/getCompany';
 import { getAllSector } from '../../store/modules/getSector';
+import { getAllCity } from '../../store/modules/getCity';
 import { array } from 'prop-types';
 import { PersonCard, Loader, CreateOrUpdatePerson } from '../../components'
 import styled from 'styled-components';
@@ -47,6 +48,7 @@ class Person extends Component{
     this.props.getAllPerson();
     this.props.getAllCompany();
     this.props.getAllSector();
+    this.props.getAllCity();
   }
   
   onOpenModal = () => {
@@ -69,12 +71,12 @@ class Person extends Component{
       }
     }
     const { open } = this.state;
-    const { person, company, sector, loadingPerson, loadingCompany, loadingSector } = this.props;
+    const { person, company, sector, city, loadingCity, loadingPerson, loadingCompany, loadingSector } = this.props;
 
     return (
       <Fragment>
         {
-          (loadingPerson || loadingCompany || loadingSector) ? 
+          (loadingPerson || loadingCompany || loadingSector || loadingCity) ? 
             (
               <Loader />
             ) :
@@ -88,7 +90,7 @@ class Person extends Component{
                     </Button>
                   </ButtonBox>
                   <Modal open={Boolean(open)} onClose={this.onCloseModal} onExited={() => this.props.getAllPerson()} center focusTrapped={false}>
-                    <CreateOrUpdatePerson isEditing={false} label="Criar funcionário" companyList={company} sectorList={sector}/>
+                    <CreateOrUpdatePerson isEditing={false} label="Criar funcionário" companyList={company} sectorList={sector} cityList={city}/>
                   </Modal>
                 </Row>
                 {
@@ -103,8 +105,11 @@ class Person extends Component{
                       sector_name={item.attributes.sector.name}
                       company={item.attributes.company.id}
                       sector={item.attributes.sector.id}
+                      city={item.attributes.city.id}
+                      city_name={item.attributes.city.name}
                       companyList={company} 
                       sectorList={sector}
+                      cityList={city}
                     />
                   ))
                 }
@@ -133,6 +138,7 @@ const mapStateToProps = (
     person: { person, getAllPerson, loadedPerson, loadingPerson }, 
     company: { company, getAllCompany, loadedCompany, loadingCompany },
     sector: { sector, getAllSector, loadedSector, loadingSector },
+    city: { city, getAllCity, loadedCity, loadingCity },
   }) => ({
   person,
   getAllPerson,
@@ -145,7 +151,11 @@ const mapStateToProps = (
   sector, 
   getAllSector, 
   loadedSector, 
-  loadingSector
+  loadingSector,
+  city, 
+  getAllCity, 
+  loadedCity, 
+  loadingCity,
 });
 
-export default connect(mapStateToProps, { getAllPerson, getAllCompany, getAllSector } )(Person);
+export default connect(mapStateToProps, { getAllPerson, getAllCompany, getAllSector, getAllCity } )(Person);

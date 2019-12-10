@@ -8,5 +8,6 @@ import { reducer as company } from './getCompany';
 import { reducer as sector } from './getSector';
 import { reducer as stat } from './getStat';
 import { reducer as equip } from './getEquip';
+import { reducer as city } from './getCity';
 
-export const rootReducer = combineReducers({ person, notebook, chip, cel, ownership, company, sector, stat, equip });
+export const rootReducer = combineReducers({ person, notebook, chip, cel, ownership, company, sector, stat, equip, city });
