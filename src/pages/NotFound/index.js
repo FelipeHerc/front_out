@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from 'styled-components';
-import nope from './nope.jpg';
+import cato from './cat.json'
+import Lottie from 'lottie-react-web'
 
 const ErrorBox = styled.div`
   display: flex;
@@ -18,7 +19,13 @@ const ErrorMessage = styled.div`
 export const NotFound = () => {
   return (
     <ErrorBox>
-      <img src={nope} alt="noooooooope" width="428" height="612"/>
+      <Lottie
+        options={{
+          animationData: cato
+        }}
+        width={850}
+        height={850}
+      />
       <ErrorMessage>
         <h1>404</h1>
         <p>Sorry, the page you requested could not be found.</p>
