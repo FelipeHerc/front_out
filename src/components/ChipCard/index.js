@@ -6,6 +6,7 @@ import { MdContactPhone } from "react-icons/md";
 import { FaTag } from "react-icons/fa";
 import { FaSimCard } from "react-icons/fa";
 import { FaMoneyBill } from "react-icons/fa";
+import { FaCashRegister } from "react-icons/fa";
 import Modal from 'react-responsive-modal';
 import Button from '@material-ui/core/Button';
 import { CreateOrUpdateChip } from '../../components'
@@ -49,6 +50,13 @@ const StatusIcon = styled(FaTag)`
   height: 12px;
 `;
 
+const CashBoxIcon = styled(FaCashRegister)`
+margin-left: 10px;
+margin-right: 10px;
+width: 13px;
+height: 13px;
+`;
+
 const PhoneIcon = styled(FaSimCard)`
   margin-right: 10px;
   width: 14px;
@@ -79,7 +87,7 @@ const Text = styled.div`
   margin: 0 10px 0 0;
 `;
 
-const CelCard = ({ id, operator, ddd, phoneNumber, value, statId, stat, statList }) => {
+const CelCard = ({ id, operator, ddd, phoneNumber, value, statId, stat, statList, costCenter, costCenterList, costCenterId }) => {
   const [open, setOpen] = useState(0);
   return (
     <StyledBox>
@@ -98,6 +106,8 @@ const CelCard = ({ id, operator, ddd, phoneNumber, value, statId, stat, statList
             <Text><strong>Número:</strong> {phoneNumber}</Text>
             <ValueIcon/>
             <Text><strong>Valor:</strong> {value}</Text>
+            <CashBoxIcon/>
+            <Text><strong>Centro de custo:</strong> {costCenter}</Text>
           </Row>
         </Col>
       </Row>
@@ -127,8 +137,10 @@ const CelCard = ({ id, operator, ddd, phoneNumber, value, statId, stat, statList
             phoneNumber={phoneNumber}
             value={value}
             statId={statId}
+            costCenterId={costCenterId}
+            costCenter={costCenter}
+            costCenterList={costCenterList}
           />
-
         </Modal>
       </Row>
     </StyledBox>

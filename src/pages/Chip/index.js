@@ -2,6 +2,7 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import { getAllChip } from '../../store/modules/getChip';
 import { getAllStat } from '../../store/modules/getStat';
+import { getAllCostCenter } from '../../store/modules/getCostCenter';
 import { array } from 'prop-types';
 import { ChipCard, Loader, CreateOrUpdateChip } from '../../components'
 import styled from 'styled-components';
@@ -53,6 +54,7 @@ class Chip extends Component{
   componentDidMount() {
     this.props.getAllChip();
     this.props.getAllStat();
+    this.props.getAllCostCenter();
   }
   render()
   {
@@ -68,44 +70,46 @@ class Chip extends Component{
     const { open } = this.state;
     const { chip, loadingChip } = this.props;
     const { stat, loadingStat } = this.props;
+    const { costCenter, loadingCostCenter } = this.props;
 
     return (
-        <Fragment>
-          {
-            (loadingChip || loadingStat) ? <Loader/> : (
-              <StyledListBox>
-                <Row>
-                  <H2>Chips</H2>
-                  <ButtonBox>
-                    <Button variant="outlined" color="primary" size="small" className={classes.button.toString()} onClick={this.onOpenModal}>
-                      Criar novo Chip
-                    </Button>
-                  </ButtonBox>
-                  <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllChip()} center focusTrapped={false}>
-                    <CreateOrUpdateChip isEditing={false} label="Criar Chip" statList={stat} />
-                  </Modal>
-                </Row>
-                {
-                  chip.map((item) => (
-                    <ChipCard 
-                      id={item.id}
-                      key={item.id}
-                      operator={item.attributes.operator}
-                      ddd={item.attributes.ddd}
-                      phoneNumber={item.attributes['phone-number']}
-                      value={item.attributes.value}
-                      statId={item.attributes.stat.id}
-                      stat={item.attributes.stat.description}
-                      statList={stat}
-                    />
-                  ))
-                }
-              </StyledListBox>
-            )
-          }
-        </Fragment>
-
-            
+      <Fragment>
+        {
+          (loadingChip || loadingStat || loadingCostCenter) ? <Loader/> : (
+            <StyledListBox>
+              <Row>
+                <H2>Chips</H2>
+                <ButtonBox>
+                  <Button variant="outlined" color="primary" size="small" className={classes.button.toString()} onClick={this.onOpenModal}>
+                    Criar novo Chip
+                  </Button>
+                </ButtonBox>
+                <Modal open={open} onClose={this.onCloseModal} onExited={() => this.props.getAllChip()} center focusTrapped={false}>
+                  <CreateOrUpdateChip isEditing={false} label="Criar Chip" statList={stat} costCenterList={costCenter} />
+                </Modal>
+              </Row>
+              {
+                chip.map((item) => (
+                  <ChipCard 
+                    id={item.id}
+                    key={item.id}
+                    operator={item.attributes.operator}
+                    ddd={item.attributes.ddd}
+                    phoneNumber={item.attributes['phone-number']}
+                    value={item.attributes.value}
+                    statId={item.attributes.stat.id}
+                    stat={item.attributes.stat.description}
+                    statList={stat}
+                    costCenterId={item.attributes.costcenter.id}
+                    costCenter={item.attributes.costcenter.name}
+                    costCenterList={costCenter}
+                  />
+                ))
+              }
+            </StyledListBox>
+          )
+        }
+      </Fragment> 
     )
   }
 }
@@ -113,6 +117,7 @@ class Chip extends Component{
 Chip.defaultProps = {
   chip: [],
   stat: [],
+  costCenter: [],
 };
 
 Chip.propTypes = {
@@ -120,7 +125,7 @@ Chip.propTypes = {
   stat: array,
 };
 
-const mapStateToProps = ({ chip: { chip, getAllChip, loadedChip, loadingChip }, stat: { loadedStat, loadingStat, errorStat, stat }} ) => ({
+const mapStateToProps = ({ chip: { chip, getAllChip, loadedChip, loadingChip }, stat: { loadedStat, loadingStat, errorStat, stat }, costCenter: { loadedCostCenter, loadingCostCenter, errorCostCenter, costCenter }} ) => ({
   chip,
   getAllChip,
   loadedChip,
@@ -129,6 +134,10 @@ const mapStateToProps = ({ chip: { chip, getAllChip, loadedChip, loadingChip }, 
   loadedStat, 
   loadingStat, 
   errorStat, 
+  loadedCostCenter, 
+  loadingCostCenter, 
+  errorCostCenter, 
+  costCenter
 });
 
-export default connect(mapStateToProps, { getAllChip, getAllStat } )(Chip);
+export default connect(mapStateToProps, { getAllChip, getAllStat, getAllCostCenter } )(Chip);

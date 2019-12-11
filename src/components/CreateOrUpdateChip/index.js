@@ -3,14 +3,14 @@ import { Alert } from '../../components';
 import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { string, array } from 'prop-types';
+import InputLabel from '@material-ui/core/InputLabel';
 import FormControl from '@material-ui/core/FormControl';
 import styled from 'styled-components'; 
+import MenuItem from '@material-ui/core/MenuItem';
+import Select from '@material-ui/core/Select';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
-import Radio from '@material-ui/core/Radio';
-import RadioGroup from '@material-ui/core/RadioGroup';
-import FormControlLabel from '@material-ui/core/FormControlLabel';
 import SaveIcon from '@material-ui/icons/Save';
 import config from '../../utils/config';
 
@@ -22,13 +22,6 @@ const Col = styled.div`
 const Row = styled.div`
   display: flex;
   flex-direction: row;
-`
-
-const StatBox = styled.div`
-  border: 1px solid #3F51B5;
-  margin: 10px 23px 10px 8px;
-  padding: 15px 15px 10px 15px;
-  border-radius: 7px;
 `
 
 const useStyles = makeStyles(theme => ({
@@ -47,7 +40,7 @@ const useStyles = makeStyles(theme => ({
   textFieldBig: {
     marginLeft: theme.spacing(1),
     marginRight: theme.spacing(1),
-    width: 400,
+    width: 415,
   },
   dense: {
     marginTop: 19,
@@ -57,7 +50,7 @@ const useStyles = makeStyles(theme => ({
   },
 }));
 
-const CretaOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumber, value, statList, statId }) => {
+const CreateOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumber, value, statList, statId, costCenter, costCenterList, costCenterId }) => {
   const classes = useStyles();
   const [saved, setSaved] = React.useState(false);
   const [emptyField, setEmptyField] = React.useState(false);
@@ -68,8 +61,9 @@ const CretaOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumbe
     chipPhoneNumber: phoneNumber || '',
     chipValue: value || '',
     chipStat: statId || '',
+    chipCostCenter: costCenterId || '',
   });
-
+console.log(values);
   const handleChange = normalize => event => {
     setValues({ ...values, [normalize]: event.target.value });
   };
@@ -119,26 +113,46 @@ const CretaOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumbe
               margin="normal"
             />
           </Row>
-          
-          <StatBox>
-            <h4>Status:</h4>
-            <Row>
-              <RadioGroup aria-label="position" name="position" value={values.chipStat} onChange={handleChange('chipStat')}>
-                {
-                  statList.map((item) => (
-                    <FormControlLabel
-                      key={item.id}
-                      value={item.id}
-                      control={<Radio color="primary" />}
-                      label={item.attributes.description}
-                      labelPlacement="end" // eslint-disable-next-line
-                      checked={values.chipStat == item.id}
-                  />
-                  ))
-                }
-              </RadioGroup>
-            </Row>
-          </StatBox>
+
+          <FormControl className={classes.formControl}>
+            <InputLabel id="costCenter-select">Centro de custo</InputLabel>
+            <Select
+              labelId="costCenter-select"
+              id="costCenter-select"
+              value={values.chipCostCenter}
+              onChange={handleChange('chipCostCenter')}
+            >
+              {
+                costCenterList.map((item) => (
+                  <MenuItem 
+                    key={item.id} 
+                    value={item.id}>
+                      {item.attributes.name}
+                  </MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
+
+          <FormControl className={classes.formControl}>
+            <InputLabel id="stat-select">Status</InputLabel>
+            <Select
+              labelId="stat-select"
+              id="stat-select"
+              value={values.chipStat}
+              onChange={handleChange('chipStat')}
+            >
+              {
+                statList.map((item) => (
+                  <MenuItem 
+                    key={item.id} 
+                    value={item.id}>
+                      {item.attributes.description}
+                  </MenuItem>
+                ))
+              }
+            </Select>
+          </FormControl>
         </Col>
         <Button
           id="save"
@@ -153,11 +167,13 @@ const CretaOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumbe
                 values.chipPhoneNumber === undefined ||
                 values.chipValue       === undefined ||
                 values.chipStat        === undefined ||
+                values.chipCostCenter  === undefined ||
                 values.chipOperator    === '' ||
                 values.chipDDD         === '' ||
                 values.chipPhoneNumber === '' ||
                 values.chipValue       === '' ||
-                values.chipStat        === ''
+                values.chipStat        === '' ||
+                values.chipCostCenter  === ''
                 ){
               setSaved(false);
               setEmptyField(true);
@@ -171,6 +187,7 @@ const CretaOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumbe
                 "phoneNumber": values.chipPhoneNumber,
                 "value": values.chipValue,
                 "stat_id": values.chipStat,
+                "costcenter_id": values.chipCostCenter,
               }).then(function(response){
                 setSaved(true);
                 setSaveError(false);
@@ -189,6 +206,7 @@ const CretaOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumbe
                 "phoneNumber": values.chipPhoneNumber,
                 "value": values.chipValue,
                 "stat_id": values.chipStat,
+                "costcenter_id": values.chipCostCenter,
               }).then(function(response){
                 setSaved(true);
                 setSaveError(false);
@@ -211,7 +229,7 @@ const CretaOrUpdateChip = ({ chipId, isEditing, label, operator, ddd, phoneNumbe
   );
 }
 
-CretaOrUpdateChip.propTypes = {
+CreateOrUpdateChip.propTypes = {
   operator: string,
   ddd: string,
   phoneNumber: string,
@@ -219,4 +237,4 @@ CretaOrUpdateChip.propTypes = {
   statList: array,
   label: string,
 }
-export default withRouter(CretaOrUpdateChip);
+export default withRouter(CreateOrUpdateChip);
