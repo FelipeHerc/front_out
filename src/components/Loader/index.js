@@ -1,6 +1,9 @@
 import React from 'react';
 import ReactLoading from 'react-loading';
 import styled from 'styled-components';
+import cato from './duck.json'
+import Lottie from 'lottie-react-web'
+
 
 const StyledLoader = styled.div`
   align-items: center;
@@ -15,8 +18,14 @@ const StyledLoader = styled.div`
 const Loader = () => (
   <StyledLoader>
     <h1>Carregando...</h1>
-    <ReactLoading type="bars" color="#3C6AC2" height={200} width={500} />
+    <Lottie
+      options={{
+        animationData: cato
+      }}
+      width={700}
+      height={700}
+    />
   </StyledLoader>
 );
- 
+
 export default Loader;
