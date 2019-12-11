@@ -132,11 +132,13 @@ const PersonCard = ({id, name, cpf, email, company_name, sector_name, companyLis
             label="Editar funcionário" 
             companyList={companyList} 
             sectorList={sectorList}
+            cityList={cityList}
             nome={name}
             cpf={cpf}
             email={email}
             empresa={company}
             setor={sector}
+            city={city}
           />
         </Modal>
       </Row>
