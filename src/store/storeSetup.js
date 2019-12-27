@@ -8,8 +8,8 @@ import axios from 'axios';
 
 const client = axios.create({
   headers: {
-    'X-User-Token': 'pxzdacxeJrF5raYCHBkR',
-    'X-User-Email': 'felipe@a.com'
+    'X-User-Token': localStorage.getItem('user-token'),
+    'X-User-Email': localStorage.getItem('user-email')
   }
 })
 

@@ -1,10 +1,12 @@
 import React, { Component, Fragment } from 'react';
 import styled from 'styled-components';
 import Particles from 'react-particles-js';
+import axios from 'axios';
 import TextField from '@material-ui/core/TextField';
 import { makeStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
 import ExitToAppIcon from '@material-ui/icons/ExitToApp';
+import config from '../../utils/config';
 
 const Background = styled.div`
   width: 100vw;
@@ -45,8 +47,6 @@ const useStyles = makeStyles(theme => ({
     }
   },
 
-  cssFocused: {},
-
   notchedOutline: {
     borderWidth: '1px',
     borderColor: 'white !important'
@@ -54,11 +54,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const login = (values) => {
-  console.log(values.email);
-  console.log(values.password);
-
-  localStorage.setItem('user-token', values.email);
-  localStorage.setItem('user-token', values.password);
+  axios.post(`${config.REACT_APP_BASE_URL}/sessions`,
+  {
+    "email": values.email,
+    "password": values.password,
+  }).then(function(response){
+    localStorage.setItem('user-email', values.email);
+    localStorage.setItem('user-token', response.data.token);
+    window.location.reload();
+  }).catch(function (error) {
+    // console.log(error);
+  });
 
 }
 
