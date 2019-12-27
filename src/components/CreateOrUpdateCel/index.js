@@ -4,7 +4,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import TextField from '@material-ui/core/TextField';
 import { string, array } from 'prop-types';
 import FormControl from '@material-ui/core/FormControl';
-import styled from 'styled-components'; 
+import styled from 'styled-components';
 import Button from '@material-ui/core/Button';
 import { withRouter } from 'react-router-dom';
 import axios from 'axios';
@@ -99,7 +99,7 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
           </Row>
 
           <Row>
-            <TextField     
+            <TextField
               id="imei1"
               label="Imei 1"
               className={classes.textFieldBig.toString()}
@@ -108,9 +108,9 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
               margin="normal"
             />
           </Row>
-          
+
           <Row>
-            <TextField    
+            <TextField
               id="imei2"
               label="Imei 2"
               className={classes.textFieldBig.toString()}
@@ -119,7 +119,7 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
               margin="normal"
             />
           </Row>
-          
+
           <StatBox>
             <h4>Status:</h4>
             <Row>
@@ -132,7 +132,7 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
                       control={<Radio color="primary" />}
                       label={item.attributes.description}
                       labelPlacement="end" // eslint-disable-next-line
-                      checked={values.celStat == item.id} 
+                      checked={values.celStat == item.id}
                   />
                   ))
                 }
@@ -165,7 +165,7 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
             }
             if (!isEditing){
               axios.post(`${config.REACT_APP_BASE_URL}/cels`,
-              {  
+              {
                 "brand": values.celBrand,
                 "model": values.celModel,
                 "imei1": values.celImei1,
@@ -183,7 +183,7 @@ const CreateOrUpdateCel = ({ celId, isEditing, label, brand, model, imei1, imei2
             }
             else{
               axios.patch(`${config.REACT_APP_BASE_URL}/cels/${celId}`,
-              {  
+              {
                 "brand": values.celBrand,
                 "model": values.celModel,
                 "imei1": values.celImei1,
